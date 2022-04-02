@@ -134,8 +134,11 @@
 
           var guiState = new LDBB.GUI.WidgetState();
 
-          var widget = new LDBB.GUI.Widget();
-          guiState.RootWidgets.push(widget);
+          var widgetOne = new LDBB.GUI.Widget('one');
+          var widgetTwo = new LDBB.GUI.Widget('two');
+          widgetTwo.Box.Position.X = 40;
+          guiState.RootWidgets.push(widgetOne);
+          guiState.RootWidgets.push(widgetTwo);
 
           window.game = new LDBB.Core.Game();
           game.SetSize(300, 200);

@@ -9,6 +9,9 @@
             this.Box = new LDBB.Math.Box(0, 0, 32, 32);
             this.Parent = null;
             this.Children = [];
+            this.State = {
+                MouseOver: false
+            };
 
             this._color = '#F0F';
         }
@@ -16,10 +19,17 @@
         Widget.prototype.HandleEvent = function (event) { };
 
         Widget.prototype.Init = function (context) {
-            context.Get('core.queue').On('widget', function (event) {
-                window.__event = event;
-                if (event.Type === 'new-color') {
-                    this._color = event.Data.color;
+            context.Get('core.queue').On('ldbb.widget', function (event) {
+                if (event.Data.Id !== this.Id) {
+                    return;
+                }
+
+                if (event.Type === 'mouse-in') {
+                    this._color = 'green';
+                }
+
+                if (event.Type === 'mouse-out') {
+                    this._color = 'red';
                 }
             }.bind(this));
         };

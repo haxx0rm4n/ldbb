@@ -24,6 +24,7 @@
         };
 
         WidgetState.prototype.Tick = function(context) {
+            var queue = context.Get('core.queue');
             var mouse = context.Get('core.input').Values['mse'];
             var mouseBox = new LDBB.Math.Box(mouse.X, mouse.Y, 1, 1);
 
@@ -31,7 +32,21 @@
 
             for (var i = 0; i < this.RootWidgets.length; ++i) {
                 var widget = this.RootWidgets[i];
+
                 if (widget.Box.CollidesWith(mouseBox)) {
+                    if (widget.State.MouseOver) {
+                        continue;
+                    }
+
+                    widget.State.MouseOver = true;
+                    queue.Dispatch('ldbb.widget', LDBB.newEvent('mouse-in', { Id: widget.Id }));
+                } else {
+                    if (!widget.State.MouseOver) {
+                        continue;
+                    }
+
+                    widget.State.MouseOver = false;
+                    queue.Dispatch('ldbb.widget', LDBB.newEvent('mouse-out', { Id: widget.Id }));
                 }
             }
         };

@@ -15,6 +15,8 @@
             };
 
             this.Queue = new LDBB.Queue.EventQueue();
+            this.Queue.AddChannel('ldbb.widget');
+
             this.Assets = new LDBB.GFX.AssetHandler();
 
             this.Input = new LDBB.Input.InputHandler();
