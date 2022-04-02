@@ -20,6 +20,14 @@
         this.InputHandler.Values["mse"].X = (evt.clientX - box.left) / canvas.Scale;
         this.InputHandler.Values["mse"].Y = (evt.clientY - box.top) / canvas.Scale;
       }.bind(this));
+
+      canvas.Root.addEventListener('mousedown', function(evt) {
+        this.InputHandler.Trigger('mse:btn-' + evt.which);
+      }.bind(this));
+
+      canvas.Root.addEventListener('mouseup', function(evt) {
+        this.InputHandler.UnTrigger('mse:btn-' + evt.which);
+      }.bind(this));
     };
 
     return MouseInputWatcher;

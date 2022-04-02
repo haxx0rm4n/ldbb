@@ -41,6 +41,27 @@
       return matched;
     };
 
+    InputHandler.prototype.Trigger = function (key) {
+      var mappings = this.ResolveMapping(key);
+      for (var i = 0; i < mappings.length; ++i) {
+        var mapping = mappings[i];
+        if (this.States[mapping].indexOf(key) === -1) {
+          this.States[mapping].push(key);
+        }
+      }
+    };
+
+    InputHandler.prototype.UnTrigger = function (key) {
+      var mappings = this.ResolveMapping(key);
+      for (var i = 0; i < mappings.length; ++i) {
+        var mapping = mappings[i];
+        var index = this.States[mapping].indexOf(key);
+        if (index !== -1) {
+          this.States[mapping].splice(index, 1);
+        }
+      }
+    };
+
     InputHandler.prototype.Check = function (key, config = {}) {
       var requireAll = config.requireAll ? config.requireAll : false;
       var single = config.single ? config.single : false;

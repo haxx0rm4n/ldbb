@@ -14,26 +14,11 @@
 
     KeyboardInputWatcher.prototype.Attach = function(canvas) {
       canvas.Root.addEventListener('keydown', function (evt) {
-        var key = 'kbd:' + evt.code;
-        var mappings = this.InputHandler.ResolveMapping(key);
-
-        for (var i = 0; i < mappings.length; ++i) {
-          if (this.InputHandler.States[mappings[i]].indexOf(key) === -1) {
-            this.InputHandler.States[mappings[i]].push(key);
-          }
-        }
+        this.InputHandler.Trigger('kbd:' + evt.code);
       }.bind(this));
 
       canvas.Root.addEventListener('keyup', function (evt) {
-        var key = 'kbd:' + evt.code;
-        var mappings = this.InputHandler.ResolveMapping(key);
-
-        for (var i = 0; i < mappings.length; ++i) {
-          var index = this.InputHandler.States[mappings[i]].indexOf(key);
-          if (index !== -1) {
-            this.InputHandler.States[mappings[i]].splice(index, 1);
-          }
-        }
+        this.InputHandler.UnTrigger('kbd:' + evt.code);
       }.bind(this));
     };
 

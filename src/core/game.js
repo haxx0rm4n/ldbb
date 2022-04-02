@@ -22,6 +22,9 @@
             this.Input = new LDBB.Input.InputHandler();
             this.Input.Use("kbd", new LDBB.Input.KeyboardInputWatcher());
             this.Input.Use("mse", new LDBB.Input.MouseInputWatcher());
+            this.Input.Assign('mouse-left', ['mse:btn-1']);
+            this.Input.Assign('mouse-middle', ['mse:btn-2']);
+            this.Input.Assign('mouse-right', ['mse:btn-3']);
 
             this.States = new LDBB.State.StateHandler();
 

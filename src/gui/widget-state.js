@@ -25,7 +25,8 @@
 
         WidgetState.prototype.Tick = function(context) {
             var queue = context.Get('core.queue');
-            var mouse = context.Get('core.input').Values['mse'];
+            var input = context.Get('core.input');
+            var mouse = input.Values['mse'];
             var mouseBox = new LDBB.Math.Box(mouse.X, mouse.Y, 1, 1);
 
             // TODO: This only works properly if nested widgets are contained within the parent.
@@ -34,6 +35,12 @@
                 var widget = this.RootWidgets[i];
 
                 if (widget.Box.CollidesWith(mouseBox)) {
+                    if (input.Check('mouse-left')) {
+                        widget.State.MouseDown = true;
+                    } else {
+                        widget.State.MouseDown = false;
+                    }
+
                     if (widget.State.MouseOver) {
                         continue;
                     }

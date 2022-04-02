@@ -10,7 +10,8 @@
             this.Parent = null;
             this.Children = [];
             this.State = {
-                MouseOver: false
+                MouseOver: false,
+                MouseDown: false
             };
 
             this._color = '#F0F';
@@ -47,10 +48,12 @@
             var offX = context.SGet('widget.x', 0);
             var offY = context.SGet('widget.y', 0);
 
+            var color = this.State.MouseDown ? 'blue' : this._color;
+
             canvas.FillRect(
                 offX + this.Box.Position.X, offY + this.Box.Position.Y,
                 this.Box.Size[0], this.Box.Size[1],
-                this._color
+                color
             );
         };
 
