@@ -134,9 +134,20 @@
 
           var guiState = new LDBB.GUI.WidgetState();
 
-          var widgetOne = new LDBB.GUI.Widget('one');
-          var widgetTwo = new LDBB.GUI.Widget('two');
+          var widgetOne = new LDBB.GUI.ButtonWidget('one', 'Button One', 100);
+          widgetOne.Box.Position.X = 40;
+          widgetOne.Box.Position.Y = 2;
+          widgetOne.OnClick = function() {
+            console.log('Clicked One!');
+          };
+
+          var widgetTwo = new LDBB.GUI.ButtonWidget('two', 'Button Two', 100);
           widgetTwo.Box.Position.X = 40;
+          widgetTwo.Box.Position.Y = 20;
+          widgetTwo.OnClick = function() {
+            console.log('Clicked Two!');
+          };
+
           guiState.RootWidgets.push(widgetOne);
           guiState.RootWidgets.push(widgetTwo);
 

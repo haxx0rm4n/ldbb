@@ -21,17 +21,7 @@
 
         Widget.prototype.Init = function (context) {
             context.Get('core.queue').On('ldbb.widget', function (event) {
-                if (event.Data.Id !== this.Id) {
-                    return;
-                }
-
-                if (event.Type === 'mouse-in') {
-                    this._color = 'green';
-                }
-
-                if (event.Type === 'mouse-out') {
-                    this._color = 'red';
-                }
+                this.HandleEvent(event);
             }.bind(this));
         };
 
