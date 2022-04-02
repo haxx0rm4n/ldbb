@@ -33,6 +33,16 @@
 
             for (var i = 0; i < this.RootWidgets.length; ++i) {
                 var widget = this.RootWidgets[i];
+                var currentState = widget.State.MouseDown;
+                var fireEventIfChanged = function() {
+                    if (currentState !== widget.State.MouseDown) {
+                        if (currentState - widget.State.MouseDown < 0) {
+                            queue.Dispatch('ldbb.widget', LDBB.newEvent('mouse-down', { Id: widget.Id }));
+                        } else {
+                            queue.Dispatch('ldbb.widget', LDBB.newEvent('mouse-up', { Id: widget.Id }));
+                        }
+                    }
+                }.bind(this);
 
                 if (widget.Box.CollidesWith(mouseBox)) {
                     if (input.Check('mouse-left')) {
@@ -40,6 +50,7 @@
                     } else {
                         widget.State.MouseDown = false;
                     }
+                    fireEventIfChanged();
 
                     if (widget.State.MouseOver) {
                         continue;
@@ -53,8 +64,10 @@
                     }
 
                     widget.State.MouseOver = false;
+                    widget.State.MouseDown = false;
                     queue.Dispatch('ldbb.widget', LDBB.newEvent('mouse-out', { Id: widget.Id }));
                 }
+
             }
         };
 
@@ -64,23 +77,6 @@
             }
 
             canvas.Plot(this._x, this._y, 'red');
-        };
-
-        WidgetState.prototype.FireEvent = function(event) {
-            this._fireEvent(event, this.RootWidgets);
-        };
-
-        WidgetState._fireEvent = function(event, widgets) {
-            for (var i = 0; i < widgets.length; ++i) {
-                var status = widgets[i].HandleEvent(event);
-                if (status === false) {
-                    return;
-                }
-
-                for (var j = 0; j < widgets[i].Children.length; ++j) {
-                    this._fireEvent(event, widgets[i].Children[j]);
-                }
-            }
         };
 
         return WidgetState;

@@ -62,7 +62,6 @@
   LDBB.DefaultLoader.Queue("gfx/tilesheet");
   LDBB.DefaultLoader.Queue("gfx/animated-sprite");
   LDBB.DefaultLoader.Queue("gui/widget");
-  LDBB.DefaultLoader.Queue("gui/widget-event");
   LDBB.DefaultLoader.Queue("gui/widget-state");
   LDBB.DefaultLoader.Queue("audio/sound");
   LDBB.DefaultLoader.Queue("input/input-handler");
