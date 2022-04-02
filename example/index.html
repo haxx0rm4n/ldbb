@@ -1,105 +1,111 @@
 <!DOCTYPE html>
 <html lang='en'>
-  <head>
-    <title>Ludum Dare: Bare-bones</title>
-    <style type="text/css">
-      html, body {
-        height: 100%;
-      }
 
-      body {
-        margin: 0;
-        background: #FFE;
-      }
+<head>
+  <title>Ludum Dare: Bare-bones</title>
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+    }
 
-      canvas {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
+    body {
+      margin: 0;
+      background: #FFE;
+    }
 
-        box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 17px red, 1px 1px 0 17px #500, 0 16px 16px #222;
-        outline: none;
-        border-radius: 2px;
-      }
-    </style>
-  </head>
-  <script defer src='/ldbb/src/autoloader.js'></script>
-  <script defer>
-    (function() {
-      'use strict';
+    canvas {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
 
-      window.addEventListener('load', function () {
-        LDBB.DefaultLoader.Load('/ldbb/src', function() {
-          var BackgroundState = (function() {
-            function BackgroundState() {
-              LDBB.State.State.apply(this, arguments);
-              this.Priority = 0;
-            }
+      box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 17px red, 1px 1px 0 17px #500, 0 16px 16px #222;
+      outline: none;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<script defer src='/ldbb/src/autoloader.js'></script>
+<script defer>
+  (function () {
+    'use strict';
 
-            BackgroundState.prototype = Object.create(LDBB.State.State.prototype);
-            BackgroundState.prototype.constructor = BackgroundState;
+    window.addEventListener('load', function () {
+      LDBB.DefaultLoader.Load('/ldbb/src', function () {
+        var BackgroundState = (function () {
+          function BackgroundState() {
+            LDBB.State.State.apply(this, arguments);
+            this.Priority = 0;
+          }
 
-            BackgroundState.prototype.Tick = function(context) {
+          BackgroundState.prototype = Object.create(LDBB.State.State.prototype);
+          BackgroundState.prototype.constructor = BackgroundState;
 
-            };
+          BackgroundState.prototype.Tick = function (context) {
 
-            BackgroundState.prototype.Draw = function(context, canvas) {
-              canvas.Fill("#888");
-            };
+          };
 
-            return BackgroundState;
-          }());
+          BackgroundState.prototype.Draw = function (context, canvas) {
+            canvas.Fill("#888");
+          };
 
-          var PenState = (function() {
-            function PenState() {
-              LDBB.State.State.apply(this, arguments);
-              this.Priority = 1;
+          return BackgroundState;
+        }());
 
-              this._x = 0;
-              this._y = 0;
-            }
+        var PenState = (function () {
+          function PenState() {
+            LDBB.State.State.apply(this, arguments);
+            this.Priority = 1;
 
-            PenState.prototype = Object.create(LDBB.State.State.prototype);
-            PenState.prototype.constructor = PenState;
+            this._x = 0;
+            this._y = 0;
+          }
 
-            PenState.prototype.Tick = function(context) {
-              var input = context.Get("core.input");
-              var states = context.Get("core.states");
+          PenState.prototype = Object.create(LDBB.State.State.prototype);
+          PenState.prototype.constructor = PenState;
 
-              if (input.Check("L")) --this._x;
-              if (input.Check("R")) ++this._x;
-              if (input.Check("U")) --this._y;
-              if (input.Check("D")) ++this._y;
+          PenState.prototype.Tick = function (context) {
+            var input = context.Get("core.input");
+            var states = context.Get("core.states");
 
-              if (input.Check("Q", {single: true})) states.Toggle("bg");
-            };
+            if (input.Check("L")) --this._x;
+            if (input.Check("R")) ++this._x;
+            if (input.Check("U")) --this._y;
+            if (input.Check("D")) ++this._y;
 
-            PenState.prototype.Draw = function(context, canvas) {
-              canvas.Plot(this._x, this._y, "#222");
-            };
+            if (input.Check("Q", { single: true })) states.Toggle("bg");
+          };
 
-            return PenState;
-          }());
+          PenState.prototype.Draw = function (context, canvas) {
+            canvas.Plot(this._x, this._y, "#222");
+          };
 
-          window.game = new LDBB.Core.Game();
-          game.SetSize(300, 200);
-          game.Init();
-          game.Assets.Queue("img:foo", "sprite", "/ldbb/example/img/green-square.png");
-          game.Input.Assign("L", ["kbd:KeyA"]);
-          game.Input.Assign("R", ["kbd:KeyD"]);
-          game.Input.Assign("U", ["kbd:KeyW"]);
-          game.Input.Assign("D", ["kbd:KeyS"]);
-          game.Input.Assign("Q", ["kbd:KeyQ"]);
-          game.States.Add("bg", new BackgroundState());
-          game.States.Add("pen", new PenState());
-          game.States.Select("bg");
-          game.States.Select("pen");
-          game.Start();
+          return PenState;
+        }());
 
-          document.body.appendChild(game.Canvas.Root);
-        });
+        window.game = new LDBB.Core.Game();
+        game.SetSize(300, 200);
+        game.ShouldLazyLoad(false);
+        game.Init();
+        game.Assets.Queue("img-gs-1", "sprite", "/ldbb/example/img/green-square.png");
+        game.Assets.Queue("img-gs-2", "sprite", "/ldbb/example/img/green-square.png");
+        game.Assets.Queue("img-gs-3", "sprite", "/ldbb/example/img/green-square.png", true);
+        game.Input.Assign("L", ["kbd:KeyA"]);
+        game.Input.Assign("R", ["kbd:KeyD"]);
+        game.Input.Assign("U", ["kbd:KeyW"]);
+        game.Input.Assign("D", ["kbd:KeyS"]);
+        game.Input.Assign("Q", ["kbd:KeyQ"]);
+        game.States.Add("bg", new BackgroundState());
+        game.States.Add("pen", new PenState());
+        game.States.Select("bg");
+        game.States.Select("pen");
+        game.Start();
+
+        document.body.appendChild(game.Canvas.Root);
       });
-    }());
-  </script>
+    });
+  }());
+</script>
+
 </html>

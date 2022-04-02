@@ -9,7 +9,8 @@
             this._config = {
                 rate: [20, 60],
                 size: [400, 300],
-                scale: 2
+                scale: 2,
+                lazyLoad: true
             };
 
             this.Assets = new LDBB.GFX.AssetHandler();
@@ -24,6 +25,11 @@
             this.Context.Set("core.assets", this.Assets);
             this.Context.Set("core.input", this.Input);
             this.Context.Set("core.states", this.States);
+        }
+
+        Game.prototype.ShouldLazyLoad = function(lazyLoad) {
+            this._config.lazyLoad = lazyLoad;
+            return this;
         }
 
         Game.prototype.SetRate = function(tps, fps) {
@@ -73,7 +79,7 @@
         Game.prototype.Start = function() {
             this.Assets.LoadAll(function () {
                 this.Loop.Start();
-            }.bind(this));
+            }.bind(this), this._config.lazyLoad);
             return this;
         };
 
