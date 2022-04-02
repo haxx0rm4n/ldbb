@@ -8,7 +8,7 @@
             LDBB.State.State.apply(this, arguments);
             this.Priority = 1000;
 
-            this._showForTicks = 60;
+            this._showForTicks = 30;
             this._nextState = nextState;
             this._counter = 0;
         }
@@ -17,10 +17,8 @@
         SplashState.prototype.constructor = SplashState;
 
         SplashState.prototype.Tick = function(context) {
-            if (this._counter % 60 === 0) {
-                context.Get("core.assets").Assets["ldbb.core.wav.loading-tone"].Play();
-            }
             if (this._counter++ >= this._showForTicks) {
+                context.Get("core.assets").Assets["ldbb.core.wav.loading-tone"].Play();
                 context.Get("core.states").Unselect("ldbb.splash-state");
                 context.Get("core.states").Select(this._nextState);
             }
@@ -32,7 +30,7 @@
             var logo = context.Get("core.assets").Assets["ldbb.core.img.logo"];
             var scale = 4;
 
-            canvas.DrawScaledSprite(logo, (canvas.Width - (logo.Width * scale)) / 2, (canvas.Height - (logo.Height * scale)) / 2, scale);
+            canvas.DrawScaledSprite(logo, canvas.Width / 2, canvas.Height / 2, scale * (this._counter / this._showForTicks));
         };
 
         return SplashState;

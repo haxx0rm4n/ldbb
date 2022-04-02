@@ -72,7 +72,32 @@
 
     Canvas.prototype.DrawScaledSprite = function(sprite, x, y, scale = 1) {
       if (sprite.IsLoaded) {
-        this.Context.drawImage(sprite.Image, 0, 0, sprite.Width, sprite.Height, x, y, sprite.Width * scale, sprite.Height * scale);
+        this.Context.save();
+        this.Context.translate(x, y);
+        this.Context.scale(scale, scale);
+        this.Context.drawImage(sprite.Image, -sprite.Width / 2, -sprite.Height / 2);
+        this.Context.restore();
+      }
+    };
+
+    Canvas.prototype.DrawRotatedSprite = function(sprite, x, y, angle = 0) {
+      if (sprite.IsLoaded) {
+        this.Context.save();
+        this.Context.translate(x, y);
+        this.Context.rotate(angle * Math.PI / 180);
+        this.Context.drawImage(sprite.Image, -sprite.Width / 2, -sprite.Height / 2);
+        this.Context.restore();
+      }
+    };
+
+    Canvas.prototype.DrawRotatedScaledSprite = function(sprite, x, y, angle = 0, scale = 1) {
+      if (sprite.IsLoaded) {
+        this.Context.save();
+        this.Context.translate(x, y);
+        this.Context.rotate(angle * Math.PI / 180);
+        this.Context.scale(scale, scale);
+        this.Context.drawImage(sprite.Image, -sprite.Width / 2, -sprite.Height / 2);
+        this.Context.restore();
       }
     };
 

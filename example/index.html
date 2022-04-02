@@ -137,7 +137,6 @@
           game.States.Select('bg');
 
           document.body.appendChild(game.Canvas.Root);
-          game.Canvas.Root.focus();
 
           var startGame = document.createElement('div');
           startGame.className = 'start-game';
@@ -145,6 +144,7 @@
           startGame.onclick = function() {
             game.Start();
             document.body.removeChild(startGame);
+            game.Canvas.Root.focus();
           };
           document.body.appendChild(startGame);
         });
