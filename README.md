@@ -6,7 +6,7 @@ A simple, yet effective, ES5 game engine designed for use during Ludum Dare.
 
 ## Included Example Game
 
-A simple Etch-a-Scetck style game has been provided as an example.
+A simple Etch-a-Sketch style game has been provided as an example.
 
 ![Example game screenshot; showing the text "LD50"](example/screenshot.jpg)
 
