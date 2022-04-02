@@ -73,5 +73,9 @@
   LDBB.DefaultLoader.Queue("math/box");
   LDBB.DefaultLoader.Queue("queue/event");
   LDBB.DefaultLoader.Queue("queue/event-queue");
+  LDBB.DefaultLoader.Queue("ecs/entity");
+  LDBB.DefaultLoader.Queue("ecs/component");
+  LDBB.DefaultLoader.Queue("ecs/system");
+  LDBB.DefaultLoader.Queue("ecs/ecs");
   LDBB.DefaultLoader.Queue("core/game");
 }());

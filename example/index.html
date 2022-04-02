@@ -22,7 +22,7 @@
 
       background: #888;
 
-      box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 17px red, 1px 1px 0 17px #500, 0 16px 16px #222;
+      box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 16px red, 1px 1px 0 16px #500, 0 16px 16px #222;
       outline: none;
       border-radius: 2px;
     }
@@ -110,14 +110,6 @@
                 assets.Assets['wav-powerUp'].Play();
                 states.Toggle('bg');
               }
-
-              if (input.Check('E', { single: true })) {
-                context.Get('core.queue').Dispatch('widget', LDBB.newEvent('new-color', {color: '#00F'}));
-              }
-
-              if (input.Check('R', { single: true })) {
-                context.Get('core.queue').Dispatch('widget', LDBB.newEvent('new-color', {color: '#F0F'}));
-              }
             };
 
             PenState.prototype.Draw = function (context, canvas) {
@@ -163,8 +155,6 @@
           game.Input.Assign('U', ['kbd:KeyW']);
           game.Input.Assign('D', ['kbd:KeyS']);
           game.Input.Assign('Q', ['kbd:KeyQ']);
-          game.Input.Assign('E', ['kbd:KeyE']);
-          game.Input.Assign('R', ['kbd:KeyR']);
           game.States.Add('bg', new BackgroundState());
           game.States.Add('gui', guiState);
           game.States.Add('pen', new PenState());
@@ -182,6 +172,45 @@
             game.Canvas.Root.focus();
           };
           document.body.appendChild(startGame);
+
+          // --
+
+          var CompA = (function() {
+            function CompA() {
+              LDBB.ECS.Component.apply(this, ['comp-a']);
+            }
+
+            CompA.prototype = Object.create(LDBB.ECS.Component.prototype);
+            CompA.prototype.constructor = CompA;
+
+            return CompA;
+          }());
+
+          var CompB = (function() {
+            function CompB() {
+              LDBB.ECS.Component.apply(this, ['comp-b']);
+            }
+
+            CompB.prototype = Object.create(LDBB.ECS.Component.prototype);
+            CompB.prototype.constructor = CompB;
+
+            return CompB;
+          }());
+
+          var SystA = (function() {
+            function SystA() {
+              LDBB.ECS.System.apply(this, [['comp-b']]);
+            }
+
+            return SystA;
+          }());
+
+          var entA = new LDBB.ECS.Entity('player', [new CompA()]);
+
+          window._ecs = new LDBB.ECS.ECS();
+          _ecs.AddSystem(new SystA());
+          _ecs.AddEntity(entA);
+          _ecs.UpdateSystemEntityCache();
         });
       });
     }());
