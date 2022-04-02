@@ -55,6 +55,7 @@
   LDBB.DefaultLoader.Queue("core/loop");
   LDBB.DefaultLoader.Queue("state/state");
   LDBB.DefaultLoader.Queue("state/state-handler");
+  LDBB.DefaultLoader.Queue("state/splash-state");
   LDBB.DefaultLoader.Queue("gfx/canvas");
   LDBB.DefaultLoader.Queue("gfx/asset-handler");
   LDBB.DefaultLoader.Queue("gfx/sprite");

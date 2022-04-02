@@ -70,6 +70,12 @@
       }
     };
 
+    Canvas.prototype.DrawScaledSprite = function(sprite, x, y, scale = 1) {
+      if (sprite.IsLoaded) {
+        this.Context.drawImage(sprite.Image, 0, 0, sprite.Width, sprite.Height, x, y, sprite.Width * scale, sprite.Height * scale);
+      }
+    };
+
     Canvas.prototype.DrawPartialSprite = function(sprite, dx, dy, sx, sy, width, height) {
       if (sprite.IsLoaded) {
         this.Context.drawImage(sprite.Image, sx, sy, width, height, dx, dy, width, height);

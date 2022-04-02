@@ -59,8 +59,8 @@
               LDBB.State.State.apply(this, arguments);
               this.Priority = 1;
 
-              this._x = 0;
-              this._y = 0;
+              this._x = 150;
+              this._y = 100;
             }
 
             PenState.prototype = Object.create(LDBB.State.State.prototype);
@@ -97,15 +97,18 @@
           game.Init();
           game.Assets.Queue("img-gs", "sprite", "/ldbb/example/img/green-square.png");
           game.Assets.Queue("wav-powerUp", "sound", "/ldbb/example/wav/powerUp.wav");
+          game.Assets.Queue("ldbb.core.img.logo", "sprite", "/ldbb/src/gfx/logo.png");
+          game.Assets.Queue("ldbb.core.wav.loading-tone", "sound", "/ldbb/src/audio/loading-tone.wav");
           game.Input.Assign("L", ["kbd:KeyA"]);
           game.Input.Assign("R", ["kbd:KeyD"]);
           game.Input.Assign("U", ["kbd:KeyW"]);
           game.Input.Assign("D", ["kbd:KeyS"]);
           game.Input.Assign("Q", ["kbd:KeyQ"]);
+          game.States.Add("ldbb.core.splash", new LDBB.State.SplashState("pen"));
           game.States.Add("bg", new BackgroundState());
           game.States.Add("pen", new PenState());
           game.States.Select("bg");
-          game.States.Select("pen");
+          game.States.Select("ldbb.core.splash");
           game.Start();
 
           document.body.appendChild(game.Canvas.Root);
