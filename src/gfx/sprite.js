@@ -7,7 +7,7 @@
     function Sprite(filename, onLoad) {
       this.Filename = filename;
       this.IsLoaded = false;
-      this.Image = new Image();
+      this.Image = document.createElement("img");
       this.Image.src = filename;
       this.Image.onload = this._handleLoad.bind(this);
       this.OnLoad = onLoad;
@@ -17,7 +17,7 @@
       this.IsLoaded = true;
       this.Width = this.Image.width;
       this.Height = this.Image.height;
-      if (this.OnLoad) {
+      if (typeof this.OnLoad === "function") {
         this.OnLoad(this);
       }
     };

@@ -64,8 +64,17 @@
                         }
                         break;
                     }
-                    case 'audio': {
-                        this._log.Info("Loading audio: " + names[index]);
+                    case 'sound': {
+                        if (async || (_current.length === 3 && _current[2] === true)) {
+                            this._log.Info("Loading sound (async): " + names[index]);
+                            this.Assets[names[index]] = new LDBB.Audio.Sound(_current[1]);
+                            step(callback);
+                        } else {
+                            this._log.Info("Loading sound: " + names[index]);
+                            this.Assets[names[index]] = new LDBB.Audio.Sound(_current[1], function() {
+                                step(callback);
+                            });
+                        }
                         break;
                     }
                 }

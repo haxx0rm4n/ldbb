@@ -26,88 +26,93 @@
     }
   </style>
 </head>
-<script defer src='/ldbb/src/autoloader.js'></script>
-<script defer>
-  (function () {
-    'use strict';
+<body>
+  <script defer src='/ldbb/src/autoloader.js'></script>
+  <script defer>
+    (function () {
+      'use strict';
 
-    window.addEventListener('load', function () {
-      LDBB.DefaultLoader.Load('/ldbb/src', function () {
-        var BackgroundState = (function () {
-          function BackgroundState() {
-            LDBB.State.State.apply(this, arguments);
-            this.Priority = 0;
-          }
+      window.addEventListener('load', function () {
+        LDBB.DefaultLoader.Load('/ldbb/src', function () {
+          var BackgroundState = (function () {
+            function BackgroundState() {
+              LDBB.State.State.apply(this, arguments);
+              this.Priority = 0;
+            }
 
-          BackgroundState.prototype = Object.create(LDBB.State.State.prototype);
-          BackgroundState.prototype.constructor = BackgroundState;
+            BackgroundState.prototype = Object.create(LDBB.State.State.prototype);
+            BackgroundState.prototype.constructor = BackgroundState;
 
-          BackgroundState.prototype.Tick = function (context) {
+            BackgroundState.prototype.Tick = function (context) {
 
-          };
+            };
 
-          BackgroundState.prototype.Draw = function (context, canvas) {
-            canvas.Fill("#888");
-          };
+            BackgroundState.prototype.Draw = function (context, canvas) {
+              canvas.Fill("#888");
+            };
 
-          return BackgroundState;
-        }());
+            return BackgroundState;
+          }());
 
-        var PenState = (function () {
-          function PenState() {
-            LDBB.State.State.apply(this, arguments);
-            this.Priority = 1;
+          var PenState = (function () {
+            function PenState() {
+              LDBB.State.State.apply(this, arguments);
+              this.Priority = 1;
 
-            this._x = 0;
-            this._y = 0;
-          }
+              this._x = 0;
+              this._y = 0;
+            }
 
-          PenState.prototype = Object.create(LDBB.State.State.prototype);
-          PenState.prototype.constructor = PenState;
+            PenState.prototype = Object.create(LDBB.State.State.prototype);
+            PenState.prototype.constructor = PenState;
 
-          PenState.prototype.Tick = function (context) {
-            var input = context.Get("core.input");
-            var states = context.Get("core.states");
+            PenState.prototype.Tick = function (context) {
+              var input = context.Get("core.input");
+              var states = context.Get("core.states");
+              var assets = context.Get("core.assets");
 
-            if (input.Check("L")) --this._x;
-            if (input.Check("R")) ++this._x;
-            if (input.Check("U")) --this._y;
-            if (input.Check("D")) ++this._y;
+              if (input.Check("L")) --this._x;
+              if (input.Check("R")) ++this._x;
+              if (input.Check("U")) --this._y;
+              if (input.Check("D")) ++this._y;
 
-            if (input.Check("Q", { single: true })) states.Toggle("bg");
-          };
+              if (input.Check("Q", { single: true })) {
+                assets.Assets["wav-powerUp"].Play();
+                states.Toggle("bg");
+              }
+            };
 
-          PenState.prototype.Draw = function (context, canvas) {
-            var assets = context.Get("core.assets");
+            PenState.prototype.Draw = function (context, canvas) {
+              var assets = context.Get("core.assets");
 
-            canvas.Plot(this._x, this._y, "#222");
+              canvas.Plot(this._x, this._y, "#222");
+            };
 
-            canvas.DrawSprite(assets.Assets["img-gs"], 10, 80);
-          };
+            return PenState;
+          }());
 
-          return PenState;
-        }());
+          window.game = new LDBB.Core.Game();
+          game.SetSize(300, 200);
+          game.ShouldLoadAsync(false);
+          game.Init();
+          game.Assets.Queue("img-gs", "sprite", "/ldbb/example/img/green-square.png");
+          game.Assets.Queue("wav-powerUp", "sound", "/ldbb/example/wav/powerUp.wav");
+          game.Input.Assign("L", ["kbd:KeyA"]);
+          game.Input.Assign("R", ["kbd:KeyD"]);
+          game.Input.Assign("U", ["kbd:KeyW"]);
+          game.Input.Assign("D", ["kbd:KeyS"]);
+          game.Input.Assign("Q", ["kbd:KeyQ"]);
+          game.States.Add("bg", new BackgroundState());
+          game.States.Add("pen", new PenState());
+          game.States.Select("bg");
+          game.States.Select("pen");
+          game.Start();
 
-        window.game = new LDBB.Core.Game();
-        game.SetSize(300, 200);
-        game.ShouldLoadAsync(true);
-        game.Init();
-        game.Assets.Queue("img-gs", "sprite", "/ldbb/example/img/green-square.png");
-        game.Input.Assign("L", ["kbd:KeyA"]);
-        game.Input.Assign("R", ["kbd:KeyD"]);
-        game.Input.Assign("U", ["kbd:KeyW"]);
-        game.Input.Assign("D", ["kbd:KeyS"]);
-        game.Input.Assign("Q", ["kbd:KeyQ"]);
-        game.States.Add("bg", new BackgroundState());
-        game.States.Add("pen", new PenState());
-        game.States.Select("bg");
-        game.States.Select("pen");
-        game.Start();
-
-        document.body.appendChild(game.Canvas.Root);
+          document.body.appendChild(game.Canvas.Root);
+          game.Canvas.Root.focus();
+        });
       });
-    });
-  }());
-</script>
-
+    }());
+  </script>
+</body>
 </html>

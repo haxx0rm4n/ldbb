@@ -60,6 +60,7 @@
   LDBB.DefaultLoader.Queue("gfx/sprite");
   LDBB.DefaultLoader.Queue("gfx/tilesheet");
   LDBB.DefaultLoader.Queue("gfx/animated-sprite");
+  LDBB.DefaultLoader.Queue("audio/sound");
   LDBB.DefaultLoader.Queue("input/input-handler");
   LDBB.DefaultLoader.Queue("input/input-watcher");
   LDBB.DefaultLoader.Queue("input/keyboard-input-watcher");
