@@ -160,10 +160,6 @@
           game.States.Select('bg');
           game.States.Select('gui');
 
-          game.Queue.On('ldbb.widget', function (event) {
-            console.log(event.Type);
-          });
-
           document.body.appendChild(game.Canvas.Root);
 
           var startGame = document.createElement('div');
