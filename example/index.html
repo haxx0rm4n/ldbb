@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Ludum Dare: Bare-bones</title>
+    <style type="text/css">
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: #FFE;
+      }
+
+      canvas {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+
+        box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 17px red, 1px 1px 0 17px #500, 0 16px 16px #222;
+        outline: none;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <script defer src='/ldbb/src/autoloader.js'></script>
+  <script defer>
+    (function() {
+      'use strict';
+
+      window.addEventListener('load', function () {
+        LDBB.DefaultLoader.Load('/ldbb/src', function() {
+          var BackgroundState = (function() {
+            function BackgroundState() {
+              LDBB.State.State.apply(this, arguments);
+              this.Priority = 0;
+            }
+
+            BackgroundState.prototype = Object.create(LDBB.State.State.prototype);
+            BackgroundState.prototype.constructor = BackgroundState;
+
+            BackgroundState.prototype.Tick = function(context) {
+
+            };
+
+            BackgroundState.prototype.Draw = function(context, canvas) {
+              canvas.Fill("#888");
+            };
+
+            return BackgroundState;
+          }());
+
+          var PenState = (function() {
+            function PenState() {
+              LDBB.State.State.apply(this, arguments);
+              this.Priority = 1;
+
+              this._x = 0;
+              this._y = 0;
+            }
+
+            PenState.prototype = Object.create(LDBB.State.State.prototype);
+            PenState.prototype.constructor = PenState;
+
+            PenState.prototype.Tick = function(context) {
+              var input = context.Get("core.input");
+              var states = context.Get("core.states");
+
+              if (input.Check("L")) --this._x;
+              if (input.Check("R")) ++this._x;
+              if (input.Check("U")) --this._y;
+              if (input.Check("D")) ++this._y;
+
+              if (input.Check("Q", {single: true})) states.Toggle("bg");
+            };
+
+            PenState.prototype.Draw = function(context, canvas) {
+              canvas.Plot(this._x, this._y, "#222");
+            };
+
+            return PenState;
+          }());
+
+          window.game = new LDBB.Core.Game();
+          game.SetSize(300, 200);
+          game.Init();
+          game.Input.Assign("L", ["kbd:KeyA"]);
+          game.Input.Assign("R", ["kbd:KeyD"]);
+          game.Input.Assign("U", ["kbd:KeyW"]);
+          game.Input.Assign("D", ["kbd:KeyS"]);
+          game.Input.Assign("Q", ["kbd:KeyQ"]);
+          game.States.Add("bg", new BackgroundState());
+          game.States.Add("pen", new PenState());
+          game.States.Select("bg");
+          game.States.Select("pen");
+          game.Start();
+
+          document.body.appendChild(game.Canvas.Root);
+        });
+      });
+    }());
+  </script>
+</html>
