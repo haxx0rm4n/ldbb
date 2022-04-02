@@ -85,6 +85,7 @@
           window.game = new LDBB.Core.Game();
           game.SetSize(300, 200);
           game.Init();
+          game.Assets.Queue("img:foo", "sprite", "/ldbb/example/img/green-square.png");
           game.Input.Assign("L", ["kbd:KeyA"]);
           game.Input.Assign("R", ["kbd:KeyD"]);
           game.Input.Assign("U", ["kbd:KeyW"]);

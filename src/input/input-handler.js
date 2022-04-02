@@ -15,7 +15,7 @@
 
     InputHandler.prototype.Assign = function (key, triggers) {
       if (!(triggers instanceof Array)) {
-        this._log.Warn("Failed to register key: " + key);
+        this._log.Info("Failed to register key: " + key);
         return;
       }
       this.Mapping[key] = triggers;
@@ -67,7 +67,7 @@
 
     InputHandler.prototype.Attach = function (canvas) {
       if (!(canvas instanceof LDBB.GFX.Canvas)) {
-        this._log.Warn("Failed to attach, argument not a canvas");
+        this._log.Info("Failed to attach, argument not a canvas");
         return;
       }
 

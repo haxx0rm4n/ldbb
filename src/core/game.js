@@ -12,6 +12,8 @@
                 scale: 2
             };
 
+            this.Assets = new LDBB.GFX.AssetHandler();
+
             this.Input = new LDBB.Input.InputHandler();
             this.Input.Use("kbd", new LDBB.Input.KeyboardInputWatcher());
             this.Input.Use("mse", new LDBB.Input.MouseInputWatcher());
@@ -19,6 +21,7 @@
             this.States = new LDBB.State.StateHandler();
 
             this.Context = new LDBB.Core.Context();
+            this.Context.Set("core.assets", this.Assets);
             this.Context.Set("core.input", this.Input);
             this.Context.Set("core.states", this.States);
         }
@@ -68,7 +71,9 @@
         };
 
         Game.prototype.Start = function() {
-            this.Loop.Start();
+            this.Assets.LoadAll(function () {
+                this.Loop.Start();
+            }.bind(this));
             return this;
         };
 

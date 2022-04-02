@@ -17,7 +17,7 @@
     };
 
     Loader.prototype.Load = function(basePath, callback) {
-      console.warn("[LDBB.Loader#Load] Beginning load");
+      console.log("[LDBB.Loader#Load] Beginning load");
       this._loadStart = Date.now();
 
       for (var i = 0; i < this.toLoad.length; ++i) {
@@ -35,14 +35,14 @@
             _loader.loading.splice(_loader.loading.indexOf(_file), 1);
             if (_loader.loading.length === 0) {
               let took = Date.now() - _loader._loadStart;
-              console.warn("[LDBB.Loader#Load] Load complete (took " + took + " ms)");
+              console.log("[LDBB.Loader#Load] Load complete (took " + took + " ms)");
               _callback();
             }
           }
         }(this, script, file, callback));
         document.body.appendChild(script);
 
-        console.warn("[LDBB.Loader#Load] Loading file: '" + file + "'");
+        console.log("[LDBB.Loader#Load] Loading file: '" + file + "'");
       }
     };
 
@@ -56,6 +56,7 @@
   LDBB.DefaultLoader.Queue("state/state");
   LDBB.DefaultLoader.Queue("state/state-handler");
   LDBB.DefaultLoader.Queue("gfx/canvas");
+  LDBB.DefaultLoader.Queue("gfx/asset-handler");
   LDBB.DefaultLoader.Queue("gfx/sprite");
   LDBB.DefaultLoader.Queue("gfx/tilesheet");
   LDBB.DefaultLoader.Queue("gfx/animated-sprite");

@@ -14,11 +14,11 @@
         State.prototype.Init = function(context) {};
 
         State.prototype.Tick = function(context) {
-            this._log.Warn("Default tick method");
+            this._log.Info("Default tick method");
         };
 
         State.prototype.Draw = function(context, canvas) {
-            this._log.Warn("Default draw method");
+            this._log.Info("Default draw method");
         };
 
         return State;

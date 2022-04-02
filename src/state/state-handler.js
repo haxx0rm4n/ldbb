@@ -12,7 +12,7 @@
 
         StateHandler.prototype.Add = function(name, state) {
             if (this._states.hasOwnProperty(name)) {
-                this._log.Warn("Attempt to add State with duplicate name: " + name);
+                this._log.Info("Attempt to add State with duplicate name: " + name);
                 return;
             }
             this._states[name] = state;
@@ -62,9 +62,8 @@
                 if (!state._initalized) {
                     try {
                         state.Init(context);
-                        this._log.Log("Initalized: " + names[i]);
                     } catch (ex) {
-                        this._log.Warn("Exception initializing state: " + names[i]);
+                        this._log.Info("Exception initializing state: " + names[i]);
                     }
                     state._initalized = true;
                 }
@@ -79,7 +78,7 @@
                         state.Tick(context);
                     }
                 } catch (ex) {
-                    this._log.Warn("Exception ticking state: " + this._selected[i]);
+                    this._log.Info("Exception ticking state: " + this._selected[i]);
                 }
             }
         };
@@ -92,7 +91,7 @@
                         state.Draw(context, canvas);
                     }
                 } catch (ex) {
-                    this._log.Warn("Exception drawing state: " + this._selected[i]);
+                    this._log.Info("Exception drawing state: " + this._selected[i]);
                 }
             }
         };

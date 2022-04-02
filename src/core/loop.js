@@ -87,13 +87,11 @@
         requestAnimationFrame(() => handler(_loop));
       }
 
-      this._log.Log("Starting");
-
       if (this.OnInit) {
         try {
           this.OnInit();
         } catch (ex) {
-          this._log.Warn("(OnInit) Caught exception: " + ex);
+          this._log.Info("(OnInit) Caught exception: " + ex);
         }
       }
 
