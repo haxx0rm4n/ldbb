@@ -61,11 +61,15 @@
   LDBB.DefaultLoader.Queue("gfx/sprite");
   LDBB.DefaultLoader.Queue("gfx/tilesheet");
   LDBB.DefaultLoader.Queue("gfx/animated-sprite");
+  LDBB.DefaultLoader.Queue("gui/widget");
+  LDBB.DefaultLoader.Queue("gui/widget-event");
+  LDBB.DefaultLoader.Queue("gui/widget-state");
   LDBB.DefaultLoader.Queue("audio/sound");
   LDBB.DefaultLoader.Queue("input/input-handler");
   LDBB.DefaultLoader.Queue("input/input-watcher");
   LDBB.DefaultLoader.Queue("input/keyboard-input-watcher");
   LDBB.DefaultLoader.Queue("input/mouse-input-watcher");
   LDBB.DefaultLoader.Queue("math/vector2");
+  LDBB.DefaultLoader.Queue("math/box");
   LDBB.DefaultLoader.Queue("core/game");
 }());

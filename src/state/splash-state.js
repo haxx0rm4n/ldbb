@@ -6,7 +6,7 @@
     LDBB.State.SplashState = (function() {
         function SplashState(nextState) {
             LDBB.State.State.apply(this, arguments);
-            this.Priority = 1000;
+            this.Priority = 2000;
 
             this._showForTicks = 30;
             this._nextState = nextState;

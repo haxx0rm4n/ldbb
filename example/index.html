@@ -124,6 +124,11 @@
             return PenState;
           }());
 
+          var guiState = new LDBB.GUI.WidgetState();
+
+          var widget = new LDBB.GUI.Widget();
+          guiState.RootWidgets.push(widget);
+
           window.game = new LDBB.Core.Game();
           game.SetSize(300, 200);
           game.ShouldLoadAsync(false);
@@ -136,8 +141,10 @@
           game.Input.Assign('D', ['kbd:KeyS']);
           game.Input.Assign('Q', ['kbd:KeyQ']);
           game.States.Add('bg', new BackgroundState());
+          game.States.Add('gui', guiState);
           game.States.Add('pen', new PenState());
           game.States.Select('bg');
+          game.States.Select('gui');
 
           document.body.appendChild(game.Canvas.Root);
 
