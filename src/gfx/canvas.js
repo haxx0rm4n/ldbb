@@ -65,11 +65,15 @@
     };
 
     Canvas.prototype.DrawSprite = function(sprite, x, y) {
-      this.Context.drawImage(sprite.Image, x, y);
+      if (sprite.IsLoaded) {
+        this.Context.drawImage(sprite.Image, x, y);
+      }
     };
 
     Canvas.prototype.DrawPartialSprite = function(sprite, dx, dy, sx, sy, width, height) {
-      this.Context.drawImage(sprite.Image, sx, sy, width, height, dx, dy, width, height);
+      if (sprite.IsLoaded) {
+        this.Context.drawImage(sprite.Image, sx, sy, width, height, dx, dy, width, height);
+      }
     };
 
     Canvas.prototype.DrawTile = function(tilesheet, id, x, y) {

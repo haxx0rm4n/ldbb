@@ -9,18 +9,18 @@
             this._queue = {};
             this.IsLoading = false;
             this.IsLoaded = false;
-            this._assets = {};
+            this.Assets = {};
         }
 
-        AssetHandler.prototype.Queue = function (name, type, filename, lazy = null) {
+        AssetHandler.prototype.Queue = function (name, type, filename, async = null) {
             if (this._queue.hasOwnProperty(name)) {
                 this._log.Info("Attempt to queue asset with duplicate name: " + name);
                 return;
             }
-            this._queue[name] = [type, filename, lazy];
+            this._queue[name] = [type, filename, async];
         };
 
-        AssetHandler.prototype.LoadAll = function (callback, lazy = true) {
+        AssetHandler.prototype.LoadAll = function (callback, async = true) {
             this.IsLoading = true;
 
             this._log.Info("Beginning load");
@@ -52,13 +52,13 @@
 
                 switch (_current[0]) {
                     case 'sprite': {
-                        if (lazy || (_current.length === 3 && _current[2] === true)) {
-                            this._log.Info("Loading sprite (lazily): " + names[index]);
-                            this._assets[names[index]] = new LDBB.GFX.Sprite(_current[1]);
+                        if (async || (_current.length === 3 && _current[2] === true)) {
+                            this._log.Info("Loading sprite (async): " + names[index]);
+                            this.Assets[names[index]] = new LDBB.GFX.Sprite(_current[1]);
                             step(callback);
                         } else {
                             this._log.Info("Loading sprite: " + names[index]);
-                            this._assets[names[index]] = new LDBB.GFX.Sprite(_current[1], function() {
+                            this.Assets[names[index]] = new LDBB.GFX.Sprite(_current[1], function() {
                                 step(callback);
                             });
                         }

@@ -78,7 +78,11 @@
           };
 
           PenState.prototype.Draw = function (context, canvas) {
+            var assets = context.Get("core.assets");
+
             canvas.Plot(this._x, this._y, "#222");
+
+            canvas.DrawSprite(assets.Assets["img-gs"], 10, 80);
           };
 
           return PenState;
@@ -86,11 +90,9 @@
 
         window.game = new LDBB.Core.Game();
         game.SetSize(300, 200);
-        game.ShouldLazyLoad(false);
+        game.ShouldLoadAsync(true);
         game.Init();
-        game.Assets.Queue("img-gs-1", "sprite", "/ldbb/example/img/green-square.png");
-        game.Assets.Queue("img-gs-2", "sprite", "/ldbb/example/img/green-square.png");
-        game.Assets.Queue("img-gs-3", "sprite", "/ldbb/example/img/green-square.png", true);
+        game.Assets.Queue("img-gs", "sprite", "/ldbb/example/img/green-square.png");
         game.Input.Assign("L", ["kbd:KeyA"]);
         game.Input.Assign("R", ["kbd:KeyD"]);
         game.Input.Assign("U", ["kbd:KeyW"]);
