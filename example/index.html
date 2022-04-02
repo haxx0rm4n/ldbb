@@ -3,7 +3,7 @@
 
 <head>
   <title>Ludum Dare: Bare-bones</title>
-  <style type="text/css">
+  <style type='text/css'>
     html,
     body {
       height: 100%;
@@ -20,12 +20,42 @@
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
 
+      background: #888;
+
       box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 17px red, 1px 1px 0 17px #500, 0 16px 16px #222;
       outline: none;
       border-radius: 2px;
     }
+
+    .start-game {
+      width: 120px;
+      height: 40px;
+
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      font-weight: normal;
+      font-size: 12pt;
+      color: white;
+      text-shadow: 0 -1px 0 #500;
+      line-height: 40px;
+      text-align: center;
+
+      background: darkred;
+      border-radius: 4px;
+
+      box-shadow: 0 0 0 1px white, 0 0 0 2px #500;
+    }
+
+    .start-game:hover {
+      box-shadow: 0 0 0 1px white, 0 0 0 2px red;
+    }
   </style>
 </head>
+
 <body>
   <script defer src='/ldbb/src/autoloader.js'></script>
   <script defer>
@@ -48,7 +78,7 @@
             };
 
             BackgroundState.prototype.Draw = function (context, canvas) {
-              canvas.Fill("#888");
+              canvas.Fill('#888');
             };
 
             return BackgroundState;
@@ -67,25 +97,25 @@
             PenState.prototype.constructor = PenState;
 
             PenState.prototype.Tick = function (context) {
-              var input = context.Get("core.input");
-              var states = context.Get("core.states");
-              var assets = context.Get("core.assets");
+              var input = context.Get('core.input');
+              var states = context.Get('core.states');
+              var assets = context.Get('core.assets');
 
-              if (input.Check("L")) --this._x;
-              if (input.Check("R")) ++this._x;
-              if (input.Check("U")) --this._y;
-              if (input.Check("D")) ++this._y;
+              if (input.Check('L')) --this._x;
+              if (input.Check('R')) ++this._x;
+              if (input.Check('U')) --this._y;
+              if (input.Check('D')) ++this._y;
 
-              if (input.Check("Q", { single: true })) {
-                assets.Assets["wav-powerUp"].Play();
-                states.Toggle("bg");
+              if (input.Check('Q', { single: true })) {
+                assets.Assets['wav-powerUp'].Play();
+                states.Toggle('bg');
               }
             };
 
             PenState.prototype.Draw = function (context, canvas) {
-              var assets = context.Get("core.assets");
+              var assets = context.Get('core.assets');
 
-              canvas.Plot(this._x, this._y, "#222");
+              canvas.Plot(this._x, this._y, '#222');
             };
 
             return PenState;
@@ -94,28 +124,33 @@
           window.game = new LDBB.Core.Game();
           game.SetSize(300, 200);
           game.ShouldLoadAsync(false);
-          game.Init();
-          game.Assets.Queue("img-gs", "sprite", "/ldbb/example/img/green-square.png");
-          game.Assets.Queue("wav-powerUp", "sound", "/ldbb/example/wav/powerUp.wav");
-          game.Assets.Queue("ldbb.core.img.logo", "sprite", "/ldbb/src/gfx/logo.png");
-          game.Assets.Queue("ldbb.core.wav.loading-tone", "sound", "/ldbb/src/audio/loading-tone.wav");
-          game.Input.Assign("L", ["kbd:KeyA"]);
-          game.Input.Assign("R", ["kbd:KeyD"]);
-          game.Input.Assign("U", ["kbd:KeyW"]);
-          game.Input.Assign("D", ["kbd:KeyS"]);
-          game.Input.Assign("Q", ["kbd:KeyQ"]);
-          game.States.Add("ldbb.core.splash", new LDBB.State.SplashState("pen"));
-          game.States.Add("bg", new BackgroundState());
-          game.States.Add("pen", new PenState());
-          game.States.Select("bg");
-          game.States.Select("ldbb.core.splash");
-          game.Start();
+          game.SetMainState('pen');
+          game.Init('/ldbb/src');
+          game.Assets.Queue('wav-powerUp', 'sound', '/ldbb/example/wav/powerUp.wav');
+          game.Input.Assign('L', ['kbd:KeyA']);
+          game.Input.Assign('R', ['kbd:KeyD']);
+          game.Input.Assign('U', ['kbd:KeyW']);
+          game.Input.Assign('D', ['kbd:KeyS']);
+          game.Input.Assign('Q', ['kbd:KeyQ']);
+          game.States.Add('bg', new BackgroundState());
+          game.States.Add('pen', new PenState());
+          game.States.Select('bg');
 
           document.body.appendChild(game.Canvas.Root);
           game.Canvas.Root.focus();
+
+          var startGame = document.createElement('div');
+          startGame.className = 'start-game';
+          startGame.innerText = 'Start Game!';
+          startGame.onclick = function() {
+            game.Start();
+            document.body.removeChild(startGame);
+          };
+          document.body.appendChild(startGame);
         });
       });
     }());
   </script>
 </body>
+
 </html>

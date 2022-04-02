@@ -21,7 +21,7 @@
                 context.Get("core.assets").Assets["ldbb.core.wav.loading-tone"].Play();
             }
             if (this._counter++ >= this._showForTicks) {
-                context.Get("core.states").Unselect("ldbb.core.splash");
+                context.Get("core.states").Unselect("ldbb.splash-state");
                 context.Get("core.states").Select(this._nextState);
             }
         };

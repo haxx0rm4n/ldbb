@@ -10,7 +10,8 @@
                 rate: [20, 60],
                 size: [400, 300],
                 scale: 2,
-                asyncLoad: true
+                asyncLoad: true,
+                mainState: 'main'
             };
 
             this.Assets = new LDBB.GFX.AssetHandler();
@@ -30,7 +31,12 @@
         Game.prototype.ShouldLoadAsync = function(asyncLoad) {
             this._config.asyncLoad = asyncLoad;
             return this;
-        }
+        };
+
+        Game.prototype.SetMainState = function(name) {
+            this._config.mainState = name;
+            return this;
+        };
 
         Game.prototype.SetRate = function(tps, fps) {
             this._config.rate = [tps, fps];
@@ -47,7 +53,7 @@
             return this;
         }
 
-        Game.prototype.Init = function() {
+        Game.prototype.Init = function(basePath) {
             // -- Configure: Context
             this.Context.Set("canvas.width", this._config.size[0]);
             this.Context.Set("canvas.height", this._config.size[1]);
@@ -71,6 +77,14 @@
 
             // -- Attach input handlers
             this.Input.Attach(this.Canvas);
+
+            // -- Queue engine assets
+            this.Assets.Queue("ldbb.core.img.logo", "sprite", basePath + "/gfx/logo.png");
+            this.Assets.Queue("ldbb.core.wav.loading-tone", "sound", basePath + "/audio/loading-tone.wav");
+
+            // -- Create splash state
+            this.States.Add("ldbb.splash-state", new LDBB.State.SplashState(this._config.mainState));
+            this.States.Select("ldbb.splash-state");
 
             // -- Allow chaining
             return this;
