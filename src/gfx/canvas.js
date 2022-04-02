@@ -107,6 +107,27 @@
       }
     };
 
+    Canvas.prototype.DrawScaledPartialSprite = function(sprite, dx, dy, sx, sy, width, height, scale = 1) {
+      if (sprite.IsLoaded) {
+        this.Context.save();
+        this.Context.translate(dx, dy);
+        this.Context.scale(scale, scale);
+        this.Context.drawImage(sprite.Image, sx, sy, width, height, -width / 2, -height / 2, width, height);
+        this.Context.restore();
+      }
+    };
+
+    Canvas.prototype.DrawRotatedScaledPartialSprite = function(sprite, dx, dy, sx, sy, width, height, angle = 0, scale = 1) {
+      if (sprite.IsLoaded) {
+        this.Context.save();
+        this.Context.translate(dx, dy);
+        this.Context.rotate(angle * Math.PI / 180);
+        this.Context.scale(scale, scale);
+        this.Context.drawImage(sprite.Image, sx, sy, width, height, -width / 2, -height / 2, width, height);
+        this.Context.restore();
+      }
+    };
+
     Canvas.prototype.DrawTile = function(tilesheet, id, x, y) {
       var coords = tilesheet.GetTileCoordinates(id);
       this.DrawPartialSprite(
