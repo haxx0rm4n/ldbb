@@ -114,8 +114,11 @@
 
             PenState.prototype.Draw = function (context, canvas) {
               var assets = context.Get('core.assets');
+              var fps = context.Get('core.fps');
 
               canvas.Plot(this._x, this._y, '#222');
+
+              canvas.DrawText('fps: ' + fps, 4, 11);
             };
 
             return PenState;

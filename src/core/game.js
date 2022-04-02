@@ -74,6 +74,7 @@
             this.Loop.OnInit = this._onInit.bind(this);
             this.Loop.OnTick = this._onTick.bind(this);
             this.Loop.OnDraw = this._onDraw.bind(this);
+            this.Loop.OnFPS = this._onFPS.bind(this);
 
             // -- Attach input handlers
             this.Input.Attach(this.Canvas);
@@ -114,6 +115,11 @@
             this.Context.SSet("dt", dt);
 
             this.States.Draw(this.Context, this.Canvas);
+        };
+
+        Game.prototype._onFPS = function(fps, tps) {
+            this.Context.Set('core.tps', tps);
+            this.Context.Set('core.fps', fps);
         };
 
         return Game;

@@ -30,6 +30,12 @@
       this.Height = height * this.Scale;
     }
 
+    Canvas.prototype.DrawText = function(text, x = 8, y = 8, color = '#000', font = 'normal 8px Arial') {
+      this.Context.fillStyle = color;
+      this.Context.font = font;
+      this.Context.fillText(text, x, y);
+    };
+
     Canvas.prototype.Fill = function(color) {
       this.Context.fillStyle = color;
       this.Context.fillRect(0, 0, this.Width, this.Height);
