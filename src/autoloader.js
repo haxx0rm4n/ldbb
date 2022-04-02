@@ -71,5 +71,7 @@
   LDBB.DefaultLoader.Queue("input/mouse-input-watcher");
   LDBB.DefaultLoader.Queue("math/vector2");
   LDBB.DefaultLoader.Queue("math/box");
+  LDBB.DefaultLoader.Queue("queue/event");
+  LDBB.DefaultLoader.Queue("queue/event-queue");
   LDBB.DefaultLoader.Queue("core/game");
 }());

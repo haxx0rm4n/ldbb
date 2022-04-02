@@ -110,6 +110,14 @@
                 assets.Assets['wav-powerUp'].Play();
                 states.Toggle('bg');
               }
+
+              if (input.Check('E', { single: true })) {
+                context.Get('core.queue').Dispatch('widget', LDBB.newEvent('new-color', {color: '#00F'}));
+              }
+
+              if (input.Check('R', { single: true })) {
+                context.Get('core.queue').Dispatch('widget', LDBB.newEvent('new-color', {color: '#F0F'}));
+              }
             };
 
             PenState.prototype.Draw = function (context, canvas) {
@@ -133,6 +141,7 @@
           game.SetSize(300, 200);
           game.ShouldLoadAsync(false);
           game.SetMainState('pen');
+          game.Queue.AddChannel('widget');
           game.Init('/ldbb/src');
           game.Assets.Queue('wav-powerUp', 'sound', '/ldbb/example/wav/powerUp.wav');
           game.Input.Assign('L', ['kbd:KeyA']);
@@ -140,6 +149,8 @@
           game.Input.Assign('U', ['kbd:KeyW']);
           game.Input.Assign('D', ['kbd:KeyS']);
           game.Input.Assign('Q', ['kbd:KeyQ']);
+          game.Input.Assign('E', ['kbd:KeyE']);
+          game.Input.Assign('R', ['kbd:KeyR']);
           game.States.Add('bg', new BackgroundState());
           game.States.Add('gui', guiState);
           game.States.Add('pen', new PenState());

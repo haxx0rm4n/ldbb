@@ -14,6 +14,7 @@
                 mainState: 'main'
             };
 
+            this.Queue = new LDBB.Queue.EventQueue();
             this.Assets = new LDBB.GFX.AssetHandler();
 
             this.Input = new LDBB.Input.InputHandler();
@@ -23,6 +24,7 @@
             this.States = new LDBB.State.StateHandler();
 
             this.Context = new LDBB.Core.Context();
+            this.Context.Set("core.queue", this.Queue);
             this.Context.Set("core.assets", this.Assets);
             this.Context.Set("core.input", this.Input);
             this.Context.Set("core.states", this.States);

@@ -17,6 +17,12 @@
         WidgetState.prototype = Object.create(LDBB.State.State.prototype);
         WidgetState.prototype.constructor = WidgetState;
 
+        WidgetState.prototype.Init = function(context) {
+            for (var i = 0; i < this.RootWidgets.length; ++i) {
+                this.RootWidgets[i].Init(context);
+            }
+        };
+
         WidgetState.prototype.Tick = function(context) {
             var mouse = context.Get('core.input').Values['mse'];
             var mouseBox = new LDBB.Math.Box(mouse.X, mouse.Y, 1, 1);
