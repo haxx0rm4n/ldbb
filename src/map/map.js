@@ -36,10 +36,10 @@
 
             var req = new XMLHttpRequest();
             req.open('GET', filename, async);
-            req.onreadystatechange = function (event) {
-                if (req.readyState === 1) {
-                    callback();
-                }
+            req.onreadystatechange = function () {
+                if (req.readyState === 4)
+                    if (callback instanceof Function)
+                        callback(Map.FromTMJ(JSON.parse(req.response)));
             };
             req.send();
         };
@@ -47,23 +47,15 @@
         Map.FromTMJ = function (map) {
             var _ = new LDBB.Map.Map();
 
-            if (map['width'] instanceof Number) {
-                _.Width = map['width'];
-            }
-            if (map['height'] instanceof Number) {
-                _.Height = map['height'];
-            }
-            if (map['orientation'] instanceof String) {
-                _.Orientation = map['orientation'];
-            }
+            _.Width = map['width'];
+            _.Height = map['height'];
+            _.Orientation = map['orientation'];
 
             if (map['tilesets'] instanceof Array) {
                 var first = map['tilesets'][0];
-                if (first instanceof Object) {
-                    if (first['name'] instanceof String) {
+                if (first instanceof Object)
+                    if (first['name'] instanceof String)
                         _.TilesetName = first['name'];
-                    }
-                }
             }
 
             if (map['layers'] instanceof Array) {
@@ -72,23 +64,23 @@
                     if (layerObj instanceof Object) {
                         switch (layerObj['name']) {
                             case 'tiles':
-                                _.Layers.Tiles = LDBB.Map.MapLayer.FromTMJ(layerObj);
+                                _.Layers.Tiles = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
                                 break;
 
                             case 'overlay':
-                                _.Layers.Overlay = LDBB.Map.MapLayer.FromTMJ(layerObj);
+                                _.Layers.Overlay = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
                                 break;
 
                             case 'point_mask':
-                                _.Layers.PointMask = LDBB.Map.MapLayer.FromTMJ(layerObj);
+                                _.Layers.PointMask = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
                                 break;
 
                             case 'trigger_mask':
-                                _.Layers.TriggerMask = LDBB.Map.MapLayer.FromTMJ(layerObj);
+                                _.Layers.TriggerMask = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
                                 break;
 
                             case 'collision_mask':
-                                _.Layers.CollisionMask = LDBB.Map.MapLayer.FromTMJ(layerObj);
+                                _.Layers.CollisionMask = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
                                 break;
 
                             default:
@@ -96,8 +88,10 @@
                         }
                     }
                 }
-            }
-        };
+
+                return _;
+            };
+        }
 
         return Map;
     }());

@@ -94,10 +94,14 @@
                         break;
                     }
                     case 'map': {
-                        this.Assets[names[index]] = LDBB.Map.Map.FromFile(_path, function() {
-                            step(callback);
-                        }, _async);
+                        (function (_names, _index) {
+                            LDBB.Map.Map.FromFile(_path, function (map) {
+                                this.Assets[_names[_index]] = map;
+                                step(callback);
+                            }.bind(this), _async);
+                        }.bind(this)(names, index));
                         this._log.Info('Loading map' + (_async ? ' (async)' : '') + ': ' + names[index]);
+                        break;
                     }
                     case 'source': {
                         var script = document.createElement('script');

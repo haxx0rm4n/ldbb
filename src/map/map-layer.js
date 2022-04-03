@@ -24,7 +24,7 @@
         }
 
         MapLayer.FromTMJ = function (map, layer) {
-            var _ = new LDBB.Map.Layer();
+            var _ = new LDBB.Map.MapLayer();
 
             if (layer['id'] instanceof Number)
                 _.Id = layer['id'];
@@ -33,21 +33,20 @@
             if (layer['name'] instanceof String)
                 _.Name = layer['name'];
             if (layer['data'] instanceof Array)
-                this.Data = Object.create(layer['data']);
+                this.Data = layer['data'];
             if (layer['objects'] instanceof Array) {
                 for (var i = 0; i < layer['objects'].length; ++i) {
-                    this.Objects.push(LDBB.Map.MapObject.FromTMJ(layer['objects'][i]));
+                    _.Objects.push(LDBB.Map.MapObject.FromTMJ(layer['objects'][i]));
                 }
             }
-                this.Objects = Object.create(layer['objects']);
             if (layer['width'] instanceof Number)
-                this.Width = layer['width'];
+                _.Width = layer['width'];
             if (layer['height'] instanceof Number)
-                this.Height = layer['height'];
+                _.Height = layer['height'];
             if (layer['x'] instanceof Number)
-                this.Position.X = layer['x'];
+                _.Position.X = layer['x'];
             if (layer['y'] instanceof Number)
-                this.Position.Y = layer['y'];
+                _.Position.Y = layer['y'];
 
             return layer;
         };
