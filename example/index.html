@@ -124,7 +124,7 @@
             return PenState;
           }());
 
-          var guiState = new LDBB.GUI.WidgetState();
+          var guiState = new LDBB.GUI.GUIState();
 
           var widgetOne = new LDBB.GUI.ButtonWidget('one', 'Button One', 100);
           widgetOne.Box.Position.X = 40;
@@ -149,6 +149,7 @@
           game.SetMainState('pen');
           game.Queue.AddChannel('widget');
           game.Init('/ldbb/src');
+          game.Assets.Queue('map-example', 'map', '/ldbb/example/map/example.tmj', { abs: true });
           game.Assets.Queue('wav-powerUp', 'sound', '/ldbb/example/wav/powerUp.wav', { abs: true });
           game.Input.Assign('L', ['kbd:KeyA']);
           game.Input.Assign('R', ['kbd:KeyD']);

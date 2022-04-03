@@ -52,14 +52,11 @@
     };
 
     Canvas.prototype.DrawRect = function(x, y, width, height, color) {
-      this.Context.strokeStyle = color;
-      this.Context.beginPath();
-      this.Context.moveTo(x, y);
-      this.Context.lineTo(x + width, y);
-      this.Context.lineTo(x + width, y + height);
-      this.Context.lineTo(x, y + height);
-      this.Context.closePath();
-      this.Context.stroke();
+      this.Context.fillStyle = color;
+      this.Context.fillRect(x, y, width, 1);
+      this.Context.fillRect(x, y + height - 1, width, 1);
+      this.Context.fillRect(x, y, 1, height);
+      this.Context.fillRect(x + width - 1, y, 1, height);
     };
 
     Canvas.prototype.DrawLine = function(from, to, color) {

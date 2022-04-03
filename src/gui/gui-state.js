@@ -3,8 +3,8 @@
 
     if (!LDBB.GUI) LDBB.GUI = {};
 
-    LDBB.GUI.WidgetState = (function() {
-        function WidgetState() {
+    LDBB.GUI.GUIState = (function() {
+        function GUIState() {
             LDBB.State.State.apply(this, arguments);
 
             this.Priority = 1000;
@@ -14,16 +14,16 @@
             this._y = 0;
         }
 
-        WidgetState.prototype = Object.create(LDBB.State.State.prototype);
-        WidgetState.prototype.constructor = WidgetState;
+        GUIState.prototype = Object.create(LDBB.State.State.prototype);
+        GUIState.prototype.constructor = GUIState;
 
-        WidgetState.prototype.Init = function(context) {
+        GUIState.prototype.Init = function(context) {
             for (var i = 0; i < this.RootWidgets.length; ++i) {
                 this.RootWidgets[i].Init(context);
             }
         };
 
-        WidgetState.prototype.Tick = function(context) {
+        GUIState.prototype.Tick = function(context) {
             var queue = context.Get('core.queue');
             var input = context.Get('core.input');
             var mouse = input.Values['mse'];
@@ -71,7 +71,7 @@
             }
         };
 
-        WidgetState.prototype.Draw = function(context, canvas) {
+        GUIState.prototype.Draw = function(context, canvas) {
             for (var i = 0; i < this.RootWidgets.length; ++i) {
                 this.RootWidgets[i].Draw(context, canvas);
             }
@@ -79,6 +79,6 @@
             canvas.Plot(this._x, this._y, 'red');
         };
 
-        return WidgetState;
+        return GUIState;
     }());
 }());

@@ -31,7 +31,7 @@
         scriptLoader.Queue('ldbb.src.gfx.tilesheet', 'source', '/gfx/tilesheet.js');
         scriptLoader.Queue('ldbb.src.gfx.animated-sprite', 'source', '/gfx/animated-sprite.js');
         scriptLoader.Queue('ldbb.src.gui.widget', 'source', '/gui/widget.js');
-        scriptLoader.Queue('ldbb.src.gui.widget-state', 'source', '/gui/widget-state.js');
+        scriptLoader.Queue('ldbb.src.gui.gui-state', 'source', '/gui/gui-state.js');
         scriptLoader.Queue('ldbb.src.gui.button-widget', 'source', '/gui/button-widget.js');
         scriptLoader.Queue('ldbb.src.audio.sound', 'source', '/audio/sound.js');
         scriptLoader.Queue('ldbb.src.input.input-handler', 'source', '/input/input-handler.js');
@@ -46,6 +46,9 @@
         scriptLoader.Queue('ldbb.src.ecs.component', 'source', '/ecs/component.js');
         scriptLoader.Queue('ldbb.src.ecs.system', 'source', '/ecs/system.js');
         scriptLoader.Queue('ldbb.src.ecs.ecs', 'source', '/ecs/ecs.js');
+        scriptLoader.Queue('ldbb.src.map.map', 'source', '/map/map.js');
+        scriptLoader.Queue('ldbb.src.map.map-object', 'source', '/map/map-object.js');
+        scriptLoader.Queue('ldbb.src.map.map-layer', 'source', '/map/map-layer.js');
         scriptLoader.Queue('ldbb.src.core.game', 'source', '/core/game.js');
 
         if (mainPath !== null)
