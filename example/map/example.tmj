@@ -60,7 +60,7 @@
          "color":"#0000ff",
          "draworder":"topdown",
          "id":6,
-         "name":"point_mask",
+         "name":"points",
          "objects":[
                 {
                  "height":0,

@@ -78,7 +78,7 @@
             };
 
             BackgroundState.prototype.Draw = function (context, canvas) {
-              canvas.Fill('#888');
+              canvas.Fill('#008');
             };
 
             return BackgroundState;
@@ -107,7 +107,6 @@
               if (input.Check('D')) ++this._y;
 
               if (input.Check('Q', { single: true })) {
-                assets.Assets['wav-powerUp'].Play();
                 states.Toggle('bg');
               }
             };
@@ -116,7 +115,7 @@
               var assets = context.Get('core.assets');
               var fps = context.Get('core.fps');
 
-              canvas.Plot(this._x, this._y, '#222');
+              canvas.Plot(this._x, this._y, '#880');
 
               canvas.DrawText('fps: ' + fps, 4, 11);
             };

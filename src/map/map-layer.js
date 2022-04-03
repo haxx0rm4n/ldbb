@@ -25,30 +25,29 @@
 
         MapLayer.FromTMJ = function (map, layer) {
             var _ = new LDBB.Map.MapLayer();
+            _.Map = map;
 
-            if (layer['id'] instanceof Number)
+            if (typeof layer['id'] === 'number')
                 _.Id = layer['id'];
-            if (map instanceof LDBB.Map.Map)
-                _.Map = map;
-            if (layer['name'] instanceof String)
+            if (typeof layer['name'] === 'string')
                 _.Name = layer['name'];
             if (layer['data'] instanceof Array)
-                this.Data = layer['data'];
+                _.Data = layer['data'];
             if (layer['objects'] instanceof Array) {
                 for (var i = 0; i < layer['objects'].length; ++i) {
                     _.Objects.push(LDBB.Map.MapObject.FromTMJ(layer['objects'][i]));
                 }
             }
-            if (layer['width'] instanceof Number)
+            if (typeof layer['width'] === 'number')
                 _.Width = layer['width'];
-            if (layer['height'] instanceof Number)
+            if (typeof layer['height'] === 'number')
                 _.Height = layer['height'];
-            if (layer['x'] instanceof Number)
+            if (typeof layer['x'] === 'number')
                 _.Position.X = layer['x'];
-            if (layer['y'] instanceof Number)
+            if (typeof layer['y'] === 'number')
                 _.Position.Y = layer['y'];
 
-            return layer;
+            return _;
         };
 
         MapLayer.prototype.TileAt = function (x, y) {
@@ -66,13 +65,24 @@
             };
         };
 
-        MapLayer.prototype.GetObject = function (name) {
-            for (var i = 0; i < this.Objects.length; ++i) {
-                if (this.Objects[i].Name === name) {
-                    return this.Objects[i];
-                }
-                return null;
+        MapLayer.prototype.GetObjects = function (by, value) {
+            if (['name', 'id', 'type'].indexOf(by) === -1) {
+                return [];
             }
+
+            var found = [];
+            for (var i = 0; i < this.Objects.length; ++i) {
+                if (by === 'name' && this.Objects[i].Name === value) {
+                    found.push(this.Objects[i]);
+                }
+                if (by === 'id' && this.Objects[i].Id === value) {
+                    found.push(this.Objects[i]);
+                }
+                if (by === 'type' && this.Objects[i].Type.startsWith(value)) {
+                    found.push(this.Objects[i]);
+                }
+            }
+            return found;
         };
 
         return MapLayer;

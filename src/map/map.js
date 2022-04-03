@@ -20,7 +20,7 @@
             this.Layers = {
                 Tiles: null,
                 Overlay: null,
-                EntitySpawn: null,
+                Points: null,
                 TriggerMask: null,
                 CollisionMask: null
             };
@@ -49,12 +49,23 @@
 
             _.Width = map['width'];
             _.Height = map['height'];
-            _.Orientation = map['orientation'];
+
+            switch (map['orientation']) {
+                case 'orthogonal':
+                    _.Orientation = LDBB.Map.MapType.Orthogonal;
+                    break;
+                case 'isometric':
+                    _.Orientation = LDBB.Map.MapType.Isometric;
+                    break;
+                case 'hexagonal':
+                    _.Orientation = LDBB.Map.MapType.Hexagonal;
+                    break;
+            }
 
             if (map['tilesets'] instanceof Array) {
                 var first = map['tilesets'][0];
                 if (first instanceof Object)
-                    if (first['name'] instanceof String)
+                    if (typeof first['name'] === 'string')
                         _.TilesetName = first['name'];
             }
 
@@ -71,8 +82,8 @@
                                 _.Layers.Overlay = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
                                 break;
 
-                            case 'point_mask':
-                                _.Layers.PointMask = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
+                            case 'points':
+                                _.Layers.Points = LDBB.Map.MapLayer.FromTMJ(this, layerObj);
                                 break;
 
                             case 'trigger_mask':
@@ -92,6 +103,37 @@
                 return _;
             };
         }
+
+        Map.prototype.GetObjects = function (by, value, layers = ['points', 'trigger_mask', 'collision_mask']) {
+            var found = [];
+            for (var i = 0; i < layers.length; ++i) {
+                var _found;
+                switch (layers[i]) {
+                    case 'tiles': {
+                        _found = this.Layers.Tiles.GetObjects(by, value);
+                        break;
+                    }
+                    case 'overlay': {
+                        _found = this.Layers.Overlay.GetObjects(by, value);
+                        break;
+                    }
+                    case 'points': {
+                        _found = this.Layers.Points.GetObjects(by, value);
+                        break;
+                    }
+                    case 'trigger_mask': {
+                        _found = this.Layers.TriggerMask.GetObjects(by, value);
+                        break;
+                    }
+                    case 'collision_mask': {
+                        _found = this.Layers.CollisionMask.GetObjects(by, value);
+                        break;
+                    }
+                }
+                for (var j = 0; j < _found.length; ++j) found.push(_found[j]);
+            }
+            return found;
+        };
 
         return Map;
     }());

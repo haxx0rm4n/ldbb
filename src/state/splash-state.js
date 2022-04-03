@@ -18,7 +18,7 @@
 
         SplashState.prototype.Tick = function(context) {
             if (this._counter++ >= this._showForTicks) {
-                context.Get("core.assets").Assets["ldbb.core.wav.loading-tone"].Play();
+                // context.Get("core.assets").Assets["ldbb.core.wav.loading-tone"].Play();
                 context.Get("core.states").Unselect("ldbb.splash-state");
                 context.Get("core.states").Select(this._nextState);
             }
