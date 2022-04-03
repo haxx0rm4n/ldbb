@@ -13,6 +13,9 @@
                 asyncLoad: true,
                 mainState: 'main'
             };
+            this.IsRunning = false;
+            this.IsInitialized = false;
+            this.BasePath = null;
 
             this.Queue = new LDBB.Queue.EventQueue();
             this.Queue.AddChannel('ldbb.widget');
@@ -61,6 +64,8 @@
         }
 
         Game.prototype.Init = function(basePath) {
+            this.BasePath = basePath;
+
             // -- Configure: Context
             this.Context.Set("canvas.width", this._config.size[0]);
             this.Context.Set("canvas.height", this._config.size[1]);
@@ -87,20 +92,26 @@
             this.Input.Attach(this.Canvas);
 
             // -- Queue engine assets
-            this.Assets.Queue("ldbb.core.img.logo", "sprite", basePath + "/gfx/logo.png");
-            this.Assets.Queue("ldbb.core.wav.loading-tone", "sound", basePath + "/audio/loading-tone.wav");
+            this.Assets.Queue("ldbb.core.img.logo", "sprite", "/gfx/logo.png");
+            this.Assets.Queue("ldbb.core.wav.loading-tone", "sound", "/audio/loading-tone.wav");
 
             // -- Create splash state
             this.States.Add("ldbb.splash-state", new LDBB.State.SplashState(this._config.mainState));
             this.States.Select("ldbb.splash-state");
 
             // -- Allow chaining
+            this.IsInitialized = true;
             return this;
         };
 
         Game.prototype.Start = function() {
-            this.Assets.LoadAll(function () {
+            if (!this.IsInitialized) {
+                this._log.Error('Attempt to start game before initalizsaton!');
+                return;
+            }
+            this.Assets.LoadAll(this.BasePath, function () {
                 this.Loop.Start();
+                this.IsRunning = true;
             }.bind(this), this._config.asyncLoad);
             return this;
         };

@@ -63,7 +63,7 @@
       'use strict';
 
       window.addEventListener('load', function () {
-        LDBB.DefaultLoader.Load('/ldbb/src', function () {
+        LDBB.Load('/ldbb/src', function () {
           var BackgroundState = (function () {
             function BackgroundState() {
               LDBB.State.State.apply(this, arguments);
@@ -149,7 +149,7 @@
           game.SetMainState('pen');
           game.Queue.AddChannel('widget');
           game.Init('/ldbb/src');
-          game.Assets.Queue('wav-powerUp', 'sound', '/ldbb/example/wav/powerUp.wav');
+          game.Assets.Queue('wav-powerUp', 'sound', '/ldbb/example/wav/powerUp.wav', { abs: true });
           game.Input.Assign('L', ['kbd:KeyA']);
           game.Input.Assign('R', ['kbd:KeyD']);
           game.Input.Assign('U', ['kbd:KeyW']);

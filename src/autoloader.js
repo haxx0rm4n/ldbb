@@ -1,81 +1,68 @@
 (function() {
-  "use strict";
+  'use strict';
 
   window.LDBB = {};
 
-  /**
-   * Auto-magic library file loader.
-   */
-  LDBB.Loader = (function() {
-    function Loader() {
-      this.toLoad = [];
-      this.loading = [];
-    }
+  LDBB.Load = function (basePath, callback, mainPath = null) {
+    // -- Manually load the AssetHandler and Logger
+    var scriptA = document.createElement('script');
+    var scriptL = document.createElement('script');
 
-    Loader.prototype.Queue = function(file) {
-      this.toLoad.push(file);
+    scriptA.onloadstart = function () {
+      console.log('LDBB Starting.js');
+      console.log('... AutoLoader');
+    };
+    scriptL.onloadstart = function () {
+      console.log('... Loader');
     };
 
-    Loader.prototype.Load = function(basePath, callback) {
-      console.log("[LDBB.Loader#Load] Beginning load");
-      this._loadStart = Date.now();
+    scriptL.onload = function () {
+      scriptA.onload = function () {
+        var scriptLoader = new LDBB.GFX.AssetHandler();
+        scriptLoader._log.Tag = 'LDBB.Load';
 
-      for (var i = 0; i < this.toLoad.length; ++i) {
-        var file = this.toLoad[i];
-        if (!file.endsWith(".js")) {
-          file += ".js";
-        }
-        file = basePath + "/" + file;
+        scriptLoader.Queue('ldbb.src.core.context', 'source', '/core/context.js');
+        scriptLoader.Queue('ldbb.src.core.loop', 'source', '/core/loop.js');
+        scriptLoader.Queue('ldbb.src.state.state', 'source', '/state/state.js');
+        scriptLoader.Queue('ldbb.src.state.state-handler', 'source', '/state/state-handler.js');
+        scriptLoader.Queue('ldbb.src.state.splash-state', 'source', '/state/splash-state.js');
+        scriptLoader.Queue('ldbb.src.gfx.canvas', 'source', '/gfx/canvas.js');
+        scriptLoader.Queue('ldbb.src.gfx.sprite', 'source', '/gfx/sprite.js');
+        scriptLoader.Queue('ldbb.src.gfx.tilesheet', 'source', '/gfx/tilesheet.js');
+        scriptLoader.Queue('ldbb.src.gfx.animated-sprite', 'source', '/gfx/animated-sprite.js');
+        scriptLoader.Queue('ldbb.src.gui.widget', 'source', '/gui/widget.js');
+        scriptLoader.Queue('ldbb.src.gui.widget-state', 'source', '/gui/widget-state.js');
+        scriptLoader.Queue('ldbb.src.gui.button-widget', 'source', '/gui/button-widget.js');
+        scriptLoader.Queue('ldbb.src.audio.sound', 'source', '/audio/sound.js');
+        scriptLoader.Queue('ldbb.src.input.input-handler', 'source', '/input/input-handler.js');
+        scriptLoader.Queue('ldbb.src.input.input-watcher', 'source', '/input/input-watcher.js');
+        scriptLoader.Queue('ldbb.src.input.keyboard-input-watcher', 'source', '/input/keyboard-input-watcher.js');
+        scriptLoader.Queue('ldbb.src.input.mouse-input-watcher', 'source', '/input/mouse-input-watcher.js');
+        scriptLoader.Queue('ldbb.src.math.vector2', 'source', '/math/vector2.js');
+        scriptLoader.Queue('ldbb.src.math.box', 'source', '/math/box.js');
+        scriptLoader.Queue('ldbb.src.queue.event', 'source', '/queue/event.js');
+        scriptLoader.Queue('ldbb.src.queue.event-queue', 'source', '/queue/event-queue.js');
+        scriptLoader.Queue('ldbb.src.ecs.entity', 'source', '/ecs/entity.js');
+        scriptLoader.Queue('ldbb.src.ecs.component', 'source', '/ecs/component.js');
+        scriptLoader.Queue('ldbb.src.ecs.system', 'source', '/ecs/system.js');
+        scriptLoader.Queue('ldbb.src.ecs.ecs', 'source', '/ecs/ecs.js');
+        scriptLoader.Queue('ldbb.src.core.game', 'source', '/core/game.js');
 
-        this.loading.push(file);
-        var script = document.createElement("script");
-        script.src = file;
-        (function(_loader, _script, _file, _callback) {
-          _script.onload = function() {
-            _loader.loading.splice(_loader.loading.indexOf(_file), 1);
-            if (_loader.loading.length === 0) {
-              let took = Date.now() - _loader._loadStart;
-              console.log("[LDBB.Loader#Load] Load complete (took " + took + " ms)");
-              _callback();
-            }
-          }
-        }(this, script, file, callback));
-        document.body.appendChild(script);
+        if (mainPath !== null)
+          scriptLoader.Queue('ldbb.src.main', 'source', mainPath, true);
 
-        console.log("[LDBB.Loader#Load] Loading file: '" + file + "'");
-      }
+        scriptLoader.LoadAll(basePath, function () {
+          callback();
+        }, true);
+      };
+
+      scriptA.async = false;
+      scriptA.src = basePath + '/gfx/asset-handler.js';
+      document.head.appendChild(scriptA);
     };
 
-    return Loader;
-  }());
-
-  LDBB.DefaultLoader = new LDBB.Loader();
-  LDBB.DefaultLoader.Queue("core/logger");
-  LDBB.DefaultLoader.Queue("core/context");
-  LDBB.DefaultLoader.Queue("core/loop");
-  LDBB.DefaultLoader.Queue("state/state");
-  LDBB.DefaultLoader.Queue("state/state-handler");
-  LDBB.DefaultLoader.Queue("state/splash-state");
-  LDBB.DefaultLoader.Queue("gfx/canvas");
-  LDBB.DefaultLoader.Queue("gfx/asset-handler");
-  LDBB.DefaultLoader.Queue("gfx/sprite");
-  LDBB.DefaultLoader.Queue("gfx/tilesheet");
-  LDBB.DefaultLoader.Queue("gfx/animated-sprite");
-  LDBB.DefaultLoader.Queue("gui/widget");
-  LDBB.DefaultLoader.Queue("gui/widget-state");
-  LDBB.DefaultLoader.Queue("gui/button-widget");
-  LDBB.DefaultLoader.Queue("audio/sound");
-  LDBB.DefaultLoader.Queue("input/input-handler");
-  LDBB.DefaultLoader.Queue("input/input-watcher");
-  LDBB.DefaultLoader.Queue("input/keyboard-input-watcher");
-  LDBB.DefaultLoader.Queue("input/mouse-input-watcher");
-  LDBB.DefaultLoader.Queue("math/vector2");
-  LDBB.DefaultLoader.Queue("math/box");
-  LDBB.DefaultLoader.Queue("queue/event");
-  LDBB.DefaultLoader.Queue("queue/event-queue");
-  LDBB.DefaultLoader.Queue("ecs/entity");
-  LDBB.DefaultLoader.Queue("ecs/component");
-  LDBB.DefaultLoader.Queue("ecs/system");
-  LDBB.DefaultLoader.Queue("ecs/ecs");
-  LDBB.DefaultLoader.Queue("core/game");
+    scriptL.async = false;
+    scriptL.src = basePath + '/core/logger.js';
+    document.head.appendChild(scriptL);
+  };
 }());
