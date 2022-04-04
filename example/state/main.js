@@ -64,26 +64,21 @@
             if (input.Check('U')) --newBox.Position.Y;
             if (input.Check('D')) ++newBox.Position.Y;
 
-            /*
             var colliders = map.Layers.CollisionMask.Objects;
             var collided = false;
             for (var i = 0; i < colliders.length; ++i) {
-                var collider = colliders[i];
-                var colliderBox = new LDBB.Math.Box(
-                    collider.Position.X, collider.Position.Y,
-                    collider.Width, collider.Height
-                );
-
-                if (newBox.CollidesWith(colliderBox)) {
-                    console.log('Collision with: ' + collider.Id);
+                if (newBox.CollidesWith(colliders[i].Box)) {
                     collided = true;
                     break;
                 }
             }
 
-            if (!collided)
-            */
-                box.Box = newBox;
+            if (!collided) {
+                box.Position.X = newBox.Position.X;
+                box.Position.Y = newBox.Position.Y;
+                box.Size[0] = newBox.Size[0];
+                box.Size[1] = newBox.Size[1];
+            }
         };
 
         return MoveSystem;

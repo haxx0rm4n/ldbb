@@ -9,9 +9,7 @@
             this.Name = null;
             this.Type = null;
             this.Properties = {};
-            this.Width = 0;
-            this.Height = 0;
-            this.Position = new LDBB.Math.Vector2(0, 0);
+            this.Box = new LDBB.Math.Box(0, 0, 0, 0);
         }
 
         MapObject._catterpillarize = function(str) {
@@ -37,13 +35,13 @@
                 }
             }
             if (typeof obj['width'] === 'number')
-                _.Width = obj['width'];
-            if (typeof obj['height'] === 'height')
-                _.Height = obj['height'];
+                _.Box.Size[0] = obj['width'];
+            if (typeof obj['height'] === 'number')
+                _.Box.Size[1] = obj['height'];
             if (typeof obj['x'] === 'number')
-                _.Position.X = obj['x'];
+                _.Box.Position.X = obj['x'];
             if (typeof obj['y'] === 'number')
-                _.Position.Y = obj['y'];
+                _.Box.Position.Y = obj['y'];
 
             return _;
         }
