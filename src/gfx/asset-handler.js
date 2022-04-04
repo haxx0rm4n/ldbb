@@ -14,15 +14,19 @@
         }
 
         AssetHandler.prototype.Queue = function (name, type, filename, options = {}) {
-            var async = (options.async instanceof Boolean) ? options.async : false;
-            var abs = (typeof options.abs === 'boolean') ? options.abs : false;
-
             if (this._queue.hasOwnProperty(name)) {
                 this._log.Info('Attempt to queue asset with duplicate name: ' + name);
                 return;
             }
 
-            this._queue[name] = [type, filename, async, abs];
+            var _options = {
+                Abs: options.Abs !== undefined ? options.Abs : false,
+                Async: options.Abs !== undefined ? options.Abs : false,
+                TileWidth: options.TileWidth !== undefined ? options.TileWidth : null,
+                TileHeight: options.TileWidth !== undefined ? options.TileHeight : null 
+            };
+
+            this._queue[name] = [type, filename, _options];
         };
 
         AssetHandler.prototype._fireCallbacks = function () {
@@ -63,12 +67,12 @@
                     return;
                 }
 
-                var _async = async || (_current.length === 3 && _current[2] === true);
-                var _path = (_current.length === 4 && _current[3] === true) ? _current[1] : basePath + _current[1];
+                var _async = async || _current[2].Async;
+                var _path = _current[2].Abs ? _current[1] : basePath + _current[1];
 
                 switch (_current[0]) {
                     case 'sprite': {
-                        if (async || (_current.length === 3 && _current[2] === true)) {
+                        if (_async) {
                             this._log.Info('Loading sprite (async): ' + names[index]);
                             this.Assets[names[index]] = new LDBB.GFX.Sprite(_path);
                             step(callback);
@@ -80,8 +84,25 @@
                         }
                         break;
                     }
+                    case 'tiles': {
+                        if (_async) {
+                            this._log.Info('Loading tiles (async): ' + names[index]);
+                            var tw = _current[2].TileWidth;
+                            var th = _current[2].TileWidth;
+                            this.Assets[names[index]] = new LDBB.GFX.Tilesheet(_path, tw, th);
+                            step(callback);
+                        } else {
+                            this._log.Info('Loading tiles: ' + names[index]);
+                            var tw = _current[2].TileWidth;
+                            var th = _current[2].TileWidth;
+                            this.Assets[names[index]] = new LDBB.GFX.Tilesheet(_path, tw, th, function () {
+                                step(callback);
+                            });
+                        }
+                        break;
+                    }
                     case 'sound': {
-                        if (async || (_current.length === 3 && _current[2] === true)) {
+                        if (_async) {
                             this._log.Info('Loading sound (async): ' + names[index]);
                             this.Assets[names[index]] = new LDBB.Audio.Sound(_path);
                             step(callback);

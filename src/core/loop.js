@@ -16,12 +16,15 @@
       this.OnDraw = null;
       this.OnFPS = null;
       this.Ticks = 0;
+      this.Running = false;
     }
 
     Loop.prototype.Start = function() {
-      var rate = Math.max(this.TickRate, this.DrawRate);
+      this.Running = true;
 
-      function handler(_loop) {
+      var handler = function(_loop) {
+        if (!this.Running) return;
+
         var currentTime = Date.now();
         var tookTime = currentTime - _loop._lastLoop;
         _loop._lastLoop = currentTime;
@@ -37,6 +40,8 @@
         }
 
         while (_loop._unprocessed.T > _loop.TickRate) {
+          if (!this.Running) return;
+
           _loop._unprocessed.T -= _loop.TickRate;
           ++_loop._count.T;
           ++_loop.Ticks;
@@ -53,6 +58,8 @@
         }
 
         while (_loop._unprocessed.D > _loop.DrawRate) {
+          if (!this.Running) return;
+
           _loop._unprocessed.D -= _loop.DrawRate;
           ++_loop._count.D;
 
@@ -85,7 +92,7 @@
         }
 
         requestAnimationFrame(() => handler(_loop));
-      }
+      }.bind(this);
 
       if (this.OnInit) {
         try {

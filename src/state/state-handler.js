@@ -63,7 +63,9 @@
                     try {
                         state.Init(context);
                     } catch (ex) {
-                        this._log.Info("Exception initializing state: " + names[i]);
+                        this._log.Error("Exception initializing state: " + names[i]);
+                        console.error(ex);
+                        context.Get('core.stop-game')();
                     }
                     state._initalized = true;
                 }
@@ -78,7 +80,9 @@
                         state.Tick(context);
                     }
                 } catch (ex) {
-                    this._log.Info("Exception ticking state: " + this._selected[i]);
+                    this._log.Error("Exception ticking state: " + this._selected[i]);
+                        console.error(ex);
+                        context.Get('core.stop-game')();
                 }
             }
         };
@@ -92,6 +96,8 @@
                     }
                 } catch (ex) {
                     this._log.Info("Exception drawing state: " + this._selected[i]);
+                        console.error(ex);
+                        context.Get('core.stop-game')();
                 }
             }
         };

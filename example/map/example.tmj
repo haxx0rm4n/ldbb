@@ -3,98 +3,168 @@
  "infinite":false,
  "layers":[
         {
-         "data":[6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 3, 1610612740, 33, 33, 33, 33,
-            6, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1610612740, 33, 33, 33, 33, 33,
-            6, 1610612738, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33, 33, 33,
-            6, 1610612738, 1, 1, 17, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33, 33,
-            6, 1610612738, 1, 1, 1, 17, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33,
-            6, 1610612738, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33,
-            2147483650, 2147483652, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33,
-            1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33,
-            1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 33, 33, 33, 33, 33,
-            3221225474, 3221225476, 1, 1, 1, 1, 1, 1, 17, 17, 17, 33, 33, 33, 33, 33,
-            6, 1610612738, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 33, 33, 33, 33,
-            6, 1610612738, 1, 1, 1, 17, 17, 1, 17, 17, 17, 17, 33, 33, 33, 33,
-            6, 1610612738, 1, 1, 17, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33, 33,
-            6, 1610612738, 1, 17, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33, 33, 33,
-            6, 1610612739, 3221225474, 3221225474, 3221225474, 3221225474, 3221225474, 3221225474, 3221225474, 3221225474, 3221225476, 33, 33, 33, 33, 33,
-            6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1610612739, 3221225476, 33, 33, 33, 33],
+         "data":[6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 33, 33,
+            6, 6, 6, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2147483652, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 33, 33, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 17, 33, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 17, 33, 33, 33,
+            2, 2, 2, 2147483652, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33, 33,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 33, 33, 33, 33,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33,
+            1073741826, 1073741826, 1073741826, 3221225476, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 33, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 33, 33, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 33, 33, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 33, 33, 33,
+            6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 17, 17, 17, 17, 17, 17, 17, 33, 33, 33,
+            6, 6, 6, 1073741827, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 1073741826, 3221225476, 33, 33,
+            6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 33, 33],
          "height":16,
          "id":1,
          "name":"tiles",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
-         "width":16,
+         "visible":false,
+         "width":24,
          "x":0,
          "y":0
         }, 
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 19, 3221225493, 1610612757, 0, 0, 0, 19, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 1610612754, 2684354581, 21, 0, 3221225493, 1610612757, 2684354578, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 1610612754, 1610612756, 0, 2684354581, 21, 2684354580, 2684354578, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 19, 0, 0, 536870961, 536870977, 2147483761, 536871009, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 19, 0, 0, 1610612785, 1610612801, 1610612817, 1610612833, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 1610612754, 1610612756, 0, 0, 0, 3221225490, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 1610612754, 1610612756, 0, 0, 19, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 1610612754, 0, 0, 19, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 3221225491, 3221225493, 1610612757, 2684354578, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 18, 2684354578, 1610612755, 18, 2684354581, 21, 3221225490, 0, 0, 0, 0,
-            0, 0, 0, 0, 18, 20, 3221225493, 1610612757, 0, 0, 3221225490, 0, 0, 0, 0, 0,
-            0, 0, 0, 18, 20, 0, 2684354581, 21, 0, 0, 19, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 19, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 20, 0, 0, 0, 0, 1073741842, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 21, 22, 0, 8, 9, 10, 11, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 37, 38, 0, 24, 25, 26, 27, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1073741842, 1073741844, 0, 0, 0, 0, 18, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 1073741842, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1073741842, 0, 0, 0, 0, 2147483667, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2147483667, 0, 0, 0, 0, 2147483667, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2147483667, 0, 0, 0, 0, 18, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 21, 22, 0, 1073741842, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0, 37, 38, 0, 2147483667, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 2147483667, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":16,
-         "id":5,
+         "id":3,
          "name":"overlay",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":16,
+         "width":24,
          "x":0,
          "y":0
         }, 
         {
-         "color":"#0000ff",
+         "color":"#ff0000",
          "draworder":"topdown",
-         "id":6,
-         "name":"points",
+         "id":4,
+         "name":"collision_mask",
          "objects":[
                 {
-                 "height":0,
-                 "id":14,
+                 "height":16,
+                 "id":1,
                  "name":"",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"target",
-                         "type":"string",
-                         "value":"player"
-                        }],
                  "rotation":0,
-                 "type":"point:spawn",
+                 "type":"",
                  "visible":true,
-                 "width":0,
-                 "x":67.5,
-                 "y":59.5
+                 "width":192,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "height":40,
+                 "id":2,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":0,
+                 "y":16
+                }, 
+                {
+                 "height":40,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":0,
+                 "y":72
+                }, 
+                {
+                 "height":16,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":192,
+                 "x":0,
+                 "y":112
+                }, 
+                {
+                 "height":96,
+                 "id":6,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":8,
+                 "x":184,
+                 "y":16
+                }, 
+                {
+                 "height":16,
+                 "id":8,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":120,
+                 "y":32
+                }, 
+                {
+                 "height":16,
+                 "id":9,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":136,
+                 "y":88
+                }, 
+                {
+                 "height":16,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":144,
+                 "y":32
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
          "color":"#00ff00",
          "draworder":"topdown",
-         "id":8,
+         "id":6,
          "name":"trigger_mask",
          "objects":[
                 {
                  "height":16,
-                 "id":30,
+                 "id":7,
                  "name":"level_exit",
                  "properties":[
                         {
@@ -110,9 +180,9 @@
                  "y":56
                 }, 
                 {
-                 "height":8,
-                 "id":35,
-                 "name":"item_dagger",
+                 "height":16,
+                 "id":12,
+                 "name":"tree_1_coconut",
                  "properties":[
                         {
                          "name":"count",
@@ -120,26 +190,26 @@
                          "value":1
                         }, 
                         {
-                         "name":"found",
+                         "name":"taken",
                          "type":"bool",
                          "value":false
                         }, 
                         {
-                         "name":"item",
+                         "name":"target",
                          "type":"string",
-                         "value":"dagger"
+                         "value":"coconut"
                         }],
                  "rotation":0,
                  "type":"trigger:item",
                  "visible":true,
                  "width":16,
-                 "x":80,
-                 "y":48
+                 "x":120,
+                 "y":32
                 }, 
                 {
                  "height":16,
-                 "id":36,
-                 "name":"item_coconuts_3",
+                 "id":13,
+                 "name":"tree_3_coconuts",
                  "properties":[
                         {
                          "name":"count",
@@ -147,12 +217,12 @@
                          "value":3
                         }, 
                         {
-                         "name":"found",
+                         "name":"taken",
                          "type":"bool",
                          "value":false
                         }, 
                         {
-                         "name":"item",
+                         "name":"target",
                          "type":"string",
                          "value":"coconut"
                         }],
@@ -160,406 +230,64 @@
                  "type":"trigger:item",
                  "visible":true,
                  "width":16,
-                 "x":72,
-                 "y":80
+                 "x":136,
+                 "y":88
                 }, 
                 {
-                 "height":16,
-                 "id":38,
-                 "name":"item_cocounts_1",
+                 "height":8,
+                 "id":14,
+                 "name":"hidden_sword",
                  "properties":[
                         {
-                         "name":"count",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"found",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"item",
+                         "name":"target",
                          "type":"string",
-                         "value":"coconut"
+                         "value":"sword"
                         }],
                  "rotation":0,
                  "type":"trigger:item",
                  "visible":true,
                  "width":16,
-                 "x":40,
-                 "y":16
+                 "x":152,
+                 "y":40
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
-         "color":"#ff0000",
+         "color":"#0000ff",
          "draworder":"topdown",
          "id":7,
-         "name":"collision_mask",
+         "name":"points",
          "objects":[
                 {
-                 "height":8,
-                 "id":15,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":88,
-                         "y":0
-                        }, 
-                        {
-                         "x":88,
-                         "y":8
-                        }, 
-                        {
-                         "x":0,
-                         "y":8
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":88,
-                 "x":0,
-                 "y":8
-                }, 
-                {
-                 "height":8,
-                 "id":16,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":120,
-                 "x":0,
-                 "y":0
-                }, 
-                {
-                 "height":40,
-                 "id":17,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":0,
-                 "y":16
-                }, 
-                {
-                 "height":8,
-                 "id":18,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":88,
-                 "x":0,
-                 "y":112
-                }, 
-                {
-                 "height":8,
-                 "id":19,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":120,
-                 "x":0,
-                 "y":120
-                }, 
-                {
-                 "height":8,
-                 "id":20,
-                 "name":"",
+                 "height":0,
+                 "id":11,
+                 "name":"player_spawn",
+                 "point":true,
                  "properties":[
                         {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":90
+                         "name":"target",
+                         "type":"string",
+                         "value":"player"
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"point:spawn",
                  "visible":true,
-                 "width":32,
-                 "x":72,
-                 "y":40
-                }, 
-                {
-                 "height":16,
-                 "id":21,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":90
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":40,
-                 "y":16
-                }, 
-                {
-                 "height":16,
-                 "id":22,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":90
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":64,
-                 "y":24
-                }, 
-                {
-                 "height":16,
-                 "id":24,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":90
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
+                 "width":0,
                  "x":48,
-                 "y":96
-                }, 
-                {
-                 "height":128,
-                 "id":27,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":120,
-                 "y":0
-                }, 
-                {
-                 "height":40,
-                 "id":29,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":0,
-                 "y":72
-                }, 
-                {
-                 "height":8,
-                 "id":33,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":90
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":72,
-                 "y":48
-                }, 
-                {
-                 "height":8,
-                 "id":34,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":90
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":96,
-                 "y":48
-                }, 
-                {
-                 "height":16,
-                 "id":37,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":90
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":72,
-                 "y":80
-                }, 
-                {
-                 "height":112,
-                 "id":39,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":104,
-                 "y":8
-                }, 
-                {
-                 "height":24,
-                 "id":40,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":88,
-                 "y":8
-                },
-            
-                {
-                 "height":40,
-                 "id":42,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":96,
-                 "y":56
-                }, 
-                {
-                 "height":24,
-                 "id":44,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":88,
-                 "y":96
-                }, 
-                {
-                 "height":8,
-                 "id":45,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":80,
-                 "y":104
-                }, 
-                {
-                 "height":16,
-                 "id":46,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":88,
                  "y":64
-                }, 
-                {
-                 "height":8,
-                 "id":47,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":80,
-                 "y":16
-                }, 
-                {
-                 "height":8,
-                 "id":48,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"resistance",
-                         "type":"int",
-                         "value":50
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":8,
-                 "x":96,
-                 "y":32
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
- "nextlayerid":9,
- "nextobjectid":49,
+ "nextlayerid":8,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.4",
@@ -576,17 +304,10 @@
          "spacing":0,
          "tilecount":256,
          "tileheight":8,
-         "tilewidth":8,
-         "transformations":
-            {
-             "hflip":true,
-             "preferuntransformed":false,
-             "rotate":false,
-             "vflip":true
-            }
+         "tilewidth":8
         }],
  "tilewidth":8,
  "type":"map",
  "version":"1.8",
- "width":16
+ "width":24
 }

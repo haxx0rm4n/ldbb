@@ -24,6 +24,15 @@
             return matchCount === types.length;
         };
 
+        Entity.prototype.Get = function (type) {
+            for (var i = 0; i < this.Components.length; ++i) {
+                if (this.Components[i].Type === type) {
+                    return this.Components[i];
+                }
+            }
+            return null;
+        };
+
         return Entity;
     }());
 }());

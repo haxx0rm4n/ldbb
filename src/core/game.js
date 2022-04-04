@@ -67,6 +67,9 @@
             this.BasePath = basePath;
 
             // -- Configure: Context
+            this.Context.Set("core.stop-game", function () {
+                this.Loop.Running = false;
+            }.bind(this));
             this.Context.Set("canvas.width", this._config.size[0]);
             this.Context.Set("canvas.height", this._config.size[1]);
             this.Context.Set("canvas.scale", this._config.scale);

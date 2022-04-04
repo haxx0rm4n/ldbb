@@ -2,219 +2,126 @@
 <html lang='en'>
 
 <head>
-  <title>Ludum Dare: Bare-bones</title>
-  <style type='text/css'>
-    html,
-    body {
-      height: 100%;
-    }
+    <title>Ludum Dare: Bare-bones</title>
+    <style type='text/css'>
+        html,
+        body {
+            height: 100%;
+        }
 
-    body {
-      margin: 0;
-      background: #FFE;
-    }
+        body {
+            margin: 0;
+            background: #FFE;
+        }
 
-    canvas {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
+        canvas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
 
-      background: #888;
+            background: #888;
 
-      box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 16px red, 1px 1px 0 16px #500, 0 16px 16px #222;
-      outline: none;
-      border-radius: 2px;
-    }
+            box-shadow: 0 0 0 1px white, 0 0 0 16px darkred, -1px -1px 0 16px red, 1px 1px 0 16px #500, 0 16px 16px #222;
+            outline: none;
+            border-radius: 2px;
+        }
 
-    .start-game {
-      width: 120px;
-      height: 40px;
+        .start-game {
+            width: 120px;
+            height: 40px;
 
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
 
-      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-      font-weight: normal;
-      font-size: 12pt;
-      color: white;
-      text-shadow: 0 -1px 0 #500;
-      line-height: 40px;
-      text-align: center;
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            font-size: 12pt;
+            color: white;
+            text-shadow: 0 -1px 0 #500;
+            line-height: 40px;
+            text-align: center;
 
-      background: darkred;
-      border-radius: 4px;
+            background: darkred;
+            border-radius: 4px;
 
-      box-shadow: 0 0 0 1px white, 0 0 0 2px #500;
-    }
+            box-shadow: 0 0 0 1px white, 0 0 0 2px #500;
+        }
 
-    .start-game:hover {
-      box-shadow: 0 0 0 1px white, 0 0 0 2px red;
-    }
-  </style>
+        .start-game:hover {
+            box-shadow: 0 0 0 1px white, 0 0 0 2px red;
+        }
+    </style>
 </head>
 
 <body>
-  <script defer src='/ldbb/src/autoloader.js'></script>
-  <script defer>
-    (function () {
-      'use strict';
+    <script defer src='/ldbb/src/autoloader.js'></script>
+    <script defer>
+        (function () {
+            'use strict';
 
-      window.addEventListener('load', function () {
-        LDBB.Load('/ldbb/src', function () {
-          var BackgroundState = (function () {
-            function BackgroundState() {
-              LDBB.State.State.apply(this, arguments);
-              this.Priority = 0;
-            }
+            window.addEventListener('load', function () {
+                LDBB.GetReady('/ldbb/src', '/ldbb/example/state/main.js');
+                LDBB.OnReady = function () {
+                    LDBB.Load(function () {
+                        // -- Create new engine instance.
+                        var game = new LDBB.Core.Game();
 
-            BackgroundState.prototype = Object.create(LDBB.State.State.prototype);
-            BackgroundState.prototype.constructor = BackgroundState;
+                        // -- Initialize engine.
+                        game.SetSize(45 * 8, 30 * 8);
+                        game.SetScale(2);
+                        game.Init('/ldbb/src');
 
-            BackgroundState.prototype.Tick = function (context) {
+                        var title = document.getElementsByTagName('title')[0];
+                        game.Loop.OnFPS = function (fps, tps) {
+                            title.innerText = '[f=' + fps + ' t=' + tps + '] Ludum Dare: Bare-bones';
+                        };
 
-            };
+                        // -- Load map.
+                        game.Assets.Queue('map.level-1', 'map', '/ldbb/example/map/level-1.tmj', { Abs: true });
+                        game.Assets.Queue('ts-terrain', 'tiles', '/ldbb/example/img/terrain.png', { Abs: true, TileWidth: 8, TileHeight: 8 });
 
-            BackgroundState.prototype.Draw = function (context, canvas) {
-              canvas.Fill('#008');
-            };
+                        // -- Assign input designations.
+                        game.Input.Assign('L', ['kbd:KeyA']);
+                        game.Input.Assign('R', ['kbd:KeyD']);
+                        game.Input.Assign('U', ['kbd:KeyW']);
+                        game.Input.Assign('D', ['kbd:KeyS']);
 
-            return BackgroundState;
-          }());
+                        // -- Add, and select, main state.
+                        game.States.Add('main', new MainState());
+                        game.States.Select('main');
 
-          var PenState = (function () {
-            function PenState() {
-              LDBB.State.State.apply(this, arguments);
-              this.Priority = 1;
+                        // -- Add game canvas to page.
+                        document.body.appendChild(game.Canvas.Root);
 
-              this._x = 150;
-              this._y = 100;
-            }
+                        // -- Create 'Start Game!' button.
+                        var startGame = document.createElement('div');
+                        startGame.className = 'start-game';
+                        startGame.innerText = 'Start Game!';
 
-            PenState.prototype = Object.create(LDBB.State.State.prototype);
-            PenState.prototype.constructor = PenState;
+                        // -- Handle start being pressed.
+                        (function (_game, _startGame) {
+                            startGame.onclick = function () {
+                                // -- Start engine.
+                                _game.Start();
 
-            PenState.prototype.Tick = function (context) {
-              var input = context.Get('core.input');
-              var states = context.Get('core.states');
-              var assets = context.Get('core.assets');
+                                // -- Remove 'Start Game!' button.
+                                document.body.removeChild(_startGame);
 
-              if (input.Check('L')) --this._x;
-              if (input.Check('R')) ++this._x;
-              if (input.Check('U')) --this._y;
-              if (input.Check('D')) ++this._y;
+                                // -- Focus the canvas.
+                                _game.Canvas.Root.focus();
+                            };
+                        }(game, startGame));
 
-              if (input.Check('Q', { single: true })) {
-                states.Toggle('bg');
-              }
-            };
-
-            PenState.prototype.Draw = function (context, canvas) {
-              var assets = context.Get('core.assets');
-              var fps = context.Get('core.fps');
-
-              canvas.Plot(this._x, this._y, '#880');
-
-              canvas.DrawText('fps: ' + fps, 4, 11);
-            };
-
-            return PenState;
-          }());
-
-          var guiState = new LDBB.GUI.GUIState();
-
-          var widgetOne = new LDBB.GUI.ButtonWidget('one', 'Button One', 100);
-          widgetOne.Box.Position.X = 40;
-          widgetOne.Box.Position.Y = 2;
-          widgetOne.OnClick = function() {
-            console.log('Clicked One!');
-          };
-
-          var widgetTwo = new LDBB.GUI.ButtonWidget('two', 'Button Two', 100);
-          widgetTwo.Box.Position.X = 40;
-          widgetTwo.Box.Position.Y = 20;
-          widgetTwo.OnClick = function() {
-            console.log('Clicked Two!');
-          };
-
-          guiState.RootWidgets.push(widgetOne);
-          guiState.RootWidgets.push(widgetTwo);
-
-          window.game = new LDBB.Core.Game();
-          game.SetSize(300, 200);
-          game.ShouldLoadAsync(false);
-          game.SetMainState('pen');
-          game.Queue.AddChannel('widget');
-          game.Init('/ldbb/src');
-          game.Assets.Queue('map-example', 'map', '/ldbb/example/map/example.tmj', { abs: true });
-          game.Assets.Queue('wav-powerUp', 'sound', '/ldbb/example/wav/powerUp.wav', { abs: true });
-          game.Input.Assign('L', ['kbd:KeyA']);
-          game.Input.Assign('R', ['kbd:KeyD']);
-          game.Input.Assign('U', ['kbd:KeyW']);
-          game.Input.Assign('D', ['kbd:KeyS']);
-          game.Input.Assign('Q', ['kbd:KeyQ']);
-          game.States.Add('bg', new BackgroundState());
-          game.States.Add('gui', guiState);
-          game.States.Add('pen', new PenState());
-          game.States.Select('bg');
-          game.States.Select('gui');
-
-          document.body.appendChild(game.Canvas.Root);
-
-          var startGame = document.createElement('div');
-          startGame.className = 'start-game';
-          startGame.innerText = 'Start Game!';
-          startGame.onclick = function() {
-            game.Start();
-            document.body.removeChild(startGame);
-            game.Canvas.Root.focus();
-          };
-          document.body.appendChild(startGame);
-
-          // --
-
-          var CompA = (function() {
-            function CompA() {
-              LDBB.ECS.Component.apply(this, ['comp-a']);
-            }
-
-            CompA.prototype = Object.create(LDBB.ECS.Component.prototype);
-            CompA.prototype.constructor = CompA;
-
-            return CompA;
-          }());
-
-          var CompB = (function() {
-            function CompB() {
-              LDBB.ECS.Component.apply(this, ['comp-b']);
-            }
-
-            CompB.prototype = Object.create(LDBB.ECS.Component.prototype);
-            CompB.prototype.constructor = CompB;
-
-            return CompB;
-          }());
-
-          var SystA = (function() {
-            function SystA() {
-              LDBB.ECS.System.apply(this, [['comp-b']]);
-            }
-
-            return SystA;
-          }());
-
-          var entA = new LDBB.ECS.Entity('player', [new CompA()]);
-
-          window._ecs = new LDBB.ECS.ECS();
-          _ecs.AddSystem(new SystA());
-          _ecs.AddEntity(entA);
-          _ecs.UpdateSystemEntityCache();
-        });
-      });
-    }());
-  </script>
+                        // -- Add 'Start Game!' button to page.
+                        document.body.appendChild(startGame);
+                    });
+                }
+            });
+        }());
+    </script>
 </body>
 
 </html>

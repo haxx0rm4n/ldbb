@@ -1,29 +1,35 @@
-(function() {
+(function () {
   "use strict";
 
   if (!LDBB.GFX) LDBB.GFX = {};
 
-  LDBB.GFX.TileSheet = (function() {
-    function TileSheet(filename, tileWidth, tileHeight, onLoad) {
+  LDBB.GFX.Tilesheet = (function () {
+    function Tilesheet(filename, tileWidth, tileHeight, onLoad) {
       this.Sprite = new LDBB.GFX.Sprite(
-          filename,
-          this._handleLoad.bind(this));
-      this.Loaded = false;
+        filename,
+        function (sprite) {
+          this._handleLoad();
+        }.bind(this)
+      );
+      this.IsLoaded = false;
       this.TileWidth = tileWidth;
       this.TileHeight = tileHeight;
       this.OnLoad = onLoad;
     }
 
-    TileSheet.prototype._handleLoad = function() {
-      this.Loaded = true;
+    Tilesheet._log = new LDBB.Core.Logger('LDBB.GFX.Tilesheet');
+
+    Tilesheet.prototype._handleLoad = function () {
+      this.IsLoaded = true;
       this.Columns = Math.floor(this.Sprite.Width / this.TileWidth);
       this.Rows = Math.floor(this.Sprite.Height / this.TileHeight);
       this.TileCount = this.Columns * this.Rows;
 
-      if (this.OnLoad) this.OnLoad(this);
+      if (this.OnLoad instanceof Function)
+        this.OnLoad(this);
     };
 
-    TileSheet.prototype.GetTileCoordinates = function(id) {
+    Tilesheet.prototype.GetTileCoordinates = function (id) {
       var column = id % this.Columns;
       var row = Math.floor(id / this.Columns);
 
@@ -33,6 +39,6 @@
       );
     };
 
-    return TileSheet;
+    return Tilesheet;
   }());
 }());

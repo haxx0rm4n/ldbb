@@ -26,6 +26,13 @@
             );
         };
 
+        Box.prototype.Copy = function () {
+            return new Box(
+                this.Position.X, this.Position.Y,
+                this.Size[0], this.Size[1]
+            );
+        };
+
         return Box;
     }());
 }());

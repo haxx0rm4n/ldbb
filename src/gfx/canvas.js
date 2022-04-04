@@ -110,35 +110,36 @@
       }
     };
 
-    Canvas.prototype.DrawScaledPartialSprite = function(sprite, dx, dy, sx, sy, width, height, scale = 1) {
+    Canvas.prototype.DrawScaledPartialSprite = function(sprite, dx, dy, sx, sy, width, height, scale = [1, 1]) {
       if (sprite.IsLoaded) {
         this.Context.save();
         this.Context.translate(dx, dy);
-        this.Context.scale(scale, scale);
+        this.Context.scale(scale[0], scale[1]);
         this.Context.drawImage(sprite.Image, sx, sy, width, height, -width / 2, -height / 2, width, height);
         this.Context.restore();
       }
     };
 
-    Canvas.prototype.DrawRotatedScaledPartialSprite = function(sprite, dx, dy, sx, sy, width, height, angle = 0, scale = 1) {
+    Canvas.prototype.DrawRotatedScaledPartialSprite = function(sprite, dx, dy, sx, sy, width, height, angle = 0, scale = 1, pivot = null) {
       if (sprite.IsLoaded) {
+
+        if (pivot === null)
+          pivot = [-width / 2, -height / 2];
+
         this.Context.save();
         this.Context.translate(dx, dy);
         this.Context.rotate(angle * Math.PI / 180);
         this.Context.scale(scale, scale);
-        this.Context.drawImage(sprite.Image, sx, sy, width, height, -width / 2, -height / 2, width, height);
+        this.Context.drawImage(sprite.Image, sx, sy, width, height, pivot[0], pivot[1], width, height);
         this.Context.restore();
       }
     };
 
     Canvas.prototype.DrawTile = function(tilesheet, id, x, y) {
+      if (!tilesheet.Sprite.IsLoaded) return;
+
       var coords = tilesheet.GetTileCoordinates(id);
-      this.DrawPartialSprite(
-        tilesheet.Sprite,
-        x, y,
-        coords.X, coords.Y,
-        tilesheet.TileWidth, tilesheet.TileHeight
-      );
+      this.DrawPartialSprite(tilesheet.Sprite, x, y, coords.X, coords.Y, tilesheet.TileWidth, tilesheet.TileHeight);
     };
 
     Canvas.prototype.DrawAnimatedSprite = function(animatedSprite, x, y) {

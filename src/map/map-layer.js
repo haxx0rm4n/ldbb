@@ -3,9 +3,8 @@
 
     const MASK_FLIP_V = 1 << 31;
     const MASK_FLIP_H = 1 << 30;
-    const MASK_FLIP_AXIS = 1 << 29;
-    const MASK_DOUBLE = 1 << 28;
-    const MASK_ALL = MASK_FLIP_V | MASK_FLIP_H | MASK_FLIP_AXIS | MASK_DOUBLE;
+    const MASK_FLIP_D = 1 << 29;
+    const MASK_ALL = MASK_FLIP_V | MASK_FLIP_H | MASK_FLIP_D;
 
     if (!LDBB.Map) LDBB.Map = {};
 
@@ -58,10 +57,9 @@
             var rawIndex = this.Data[x + y * this.Width];
             return {
                 Index: rawIndex & ~MASK_ALL,
-                FlipV: rawIndex & MASK_FLIP_V === MASK_FLIP_V,
                 FlipH: rawIndex & MASK_FLIP_H === MASK_FLIP_H,
-                FlipAxis: rawIndex & MASK_FLIP_AXIS === MASK_FLIP_AXIS,
-                Double: rawIndex & MASK_DOUBLE === MASK_DOUBLE
+                FlipV: rawIndex & MASK_FLIP_V === MASK_FLIP_V,
+                FlipD: rawIndex & MASK_FLIP_D === MASK_FLIP_D
             };
         };
 
